@@ -1,4 +1,5 @@
-import Logotype from "@/components/Logotype"
+import Logotype from "@/components/Logotype";
+import Timer from "@/components/Timer";
 
 const Header = () => {
   return <header className="py-12">
@@ -10,13 +11,7 @@ const Header = () => {
         <div className="py-2">
           <ul className="flex flex-col space-y-2">
             <li>
-              <div className="flex items-center text-white text-xl">
-                <svg className="text-red-500 mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="M12 6L12 12 16 14"></path>
-                </svg>
-                <span className="inline-block">00:00:00</span>
-              </div>
+              <Timer />
             </li>
             <li>
               <div className="flex items-center text-white text-xl">
