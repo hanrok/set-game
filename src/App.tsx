@@ -1,8 +1,14 @@
+import Layout from "@/components/Layout";
+import GameBoard from "@/components/GameBoard";
+import SetGameContext from "@/components/Context";
+
 const App = () => {
   return (
-    <div className="App">
-      Hello World
-    </div>
+    <SetGameContext>
+      <Layout>
+        <GameBoard />
+      </Layout>
+    </SetGameContext>
   );
 }
 
