@@ -70,3 +70,22 @@ export const validatePossibleSet = (
   const cards = selectedSet.map(index => cardsOnBoard[index]);
   return isSet(getFeatures(cards));
 };
+
+export const countSets = (cards: number[][]) => {
+  let size = 0;
+  const sets = [];
+
+  for (let i = 0; i < cards.length; i++) {
+    for (let j = i + 1; j < cards.length; j++) {
+      for (let k = j + 1; k < cards.length; k++) {
+        const isValidSet = isSet(getFeatures([cards[i], cards[j], cards[k]]));
+        if (isValidSet) {
+          size += 1;
+          sets.push([cards[i], cards[j], cards[k]]);
+        }
+      }
+    }
+  }
+
+  return { size, sets };
+}

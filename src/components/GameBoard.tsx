@@ -12,6 +12,7 @@ const GameBoard = () => {
 
   const {
     deck,
+    nsets,
     selectedSet,
     cardsOnBoard,
     unselectCard,
@@ -66,9 +67,15 @@ const GameBoard = () => {
                 config={card}
                 onClick={() => onSelectCard(index)} />) }
         </div>
-        <div className="py-2 flex items-center justify-center text-gray-400">
-          <span className="inline-block font-semibold mr-2 text-lg text-white">{deck.length}</span>
-          tarjetas restantes
+        <div className="py-2 flex items-center justify-between text-gray-400">
+          <div className="flex items-center">
+            <span className="inline-block font-semibold mr-2 text-lg text-white">{deck.length}</span>
+            tarjetas restantes
+          </div>
+          <div className="flex items-center">
+            Set Posibles: 
+            <span className="inline-block font-semibold ml-2 text-lg text-white">{nsets.length}</span>
+          </div>
         </div>
       </div>
     </section>
