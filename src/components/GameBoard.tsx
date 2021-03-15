@@ -51,9 +51,9 @@ const GameBoard = () => {
         { showNotification
           ? <Alert type={notificationMessage?.type} message={notificationMessage?.message} />
           : <Alert message={<>
-            <span className="font-semibold px-2 py-1 rounded bg-yellow-50 text-yellow-800 mr-1">✨ Regla mágica:</span> Si dos cartas son... y una no es, entonces no es un SET
+            <span className="font-semibold px-2 py-1 rounded bg-gray-700 text-gray-300 mr-1">✨ Regla mágica:</span> Si dos cartas son... y una no es, entonces no es un <span className="font-semibold underline">SET</span>
           </>} /> }
-        <div className="grid grid-cols-4 gap-x-5 gap-y-6">
+        <div className="grid grid-cols-4 gap-x-5 gap-y-6 mb-2">
           { cardsOnBoard.map((card, index) => 
               <Card
                 selected={selectedSet.indexOf(index) !== -1}
@@ -62,7 +62,7 @@ const GameBoard = () => {
                 onClick={() => onSelectCard(index)} />) }
         </div>
         <div className="py-2 flex items-center text-gray-400">
-          <span className="inline-block text-bold mr-2 text-lg text-white">69</span>
+          <span className="inline-block font-semibold mr-2 text-lg text-white">69</span>
           tarjetas restantes
         </div>
       </div>

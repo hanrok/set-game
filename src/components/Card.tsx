@@ -13,7 +13,7 @@ const createImages = (config: number[]) => {
 
   for (let i = 0; i < n; i++) {
     shapes.push(
-      <img className="" key={i} alt="shape" src={`/assets/svg/${[shape, color, shading].toString()}.svg`} />
+      <img loading="lazy" key={i} alt="shape" src={`/assets/svg/${[shape, color, shading].toString()}.svg`} />
     );
   }
 

@@ -6,7 +6,7 @@ interface IAlertProps {
 }
 
 const Alert = ({ type = "info", message }: IAlertProps) => {
-  const className = classNames("text-center p-3 rounded mb-6 font-semibold", {
+  const className = classNames("text-center p-3 rounded mb-6", {
     "bg-gray-600 text-gray-200": (type === 'info'),
     "bg-green-300 text-green-900": (type === 'success'),
     "bg-yellow-200 text-yellow-900": (type === 'warning'),
