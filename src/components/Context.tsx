@@ -67,7 +67,6 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
         currentCardsOnBoard.splice(cardIndex, 1, card);
       });
     } else {
-      // TODO: What happend if deck is empty?
       cardsIndexes.forEach((cardIndex) => {
         currentCardsOnBoard.splice(cardIndex, 1);
       });
