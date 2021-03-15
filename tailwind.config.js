@@ -2,7 +2,7 @@ const defaultConfig = require('tailwindcss/defaultConfig')
 
 module.exports = {
   purge: [
-    'src/**/*.{ts,tsx,jsx,js},',
+    './src/**/*.{ts,tsx,jsx,js}',
     './public/index.html'
   ],
   darkMode: false, // or 'media' or 'class'
