@@ -18,7 +18,7 @@ const Header = () => {
               <Timer />
             </li>
             <li>
-              <div className="flex items-center text-white text-2xl">
+              <div className="flex items-center text-white text-2xl w-16">
                 <svg className="text-yellow-500 mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
                   <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
                   <path d="M7 7H10V16H7z"></path>
