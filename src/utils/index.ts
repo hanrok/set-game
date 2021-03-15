@@ -1,3 +1,5 @@
+import { arrSum, isSet } from "./common";
+
 export const generateCards = () => {
   const cards = [];
 
@@ -15,30 +17,56 @@ export const generateCards = () => {
 };
 
 export const setCardsOnTable = (cards: number[][]) => {
-  const newArray = [...cards];
   const preGameCards: number[][] = [];
 
   for (let r = 0; r < 3; r++) {
     for (let c = 0; c < 4; c++) {
-      if (newArray.length > 0) {
-        const card = newArray.pop() as number[];
+      if (cards.length > 0) {
+        const card = cards.pop() as number[];
         preGameCards.push(card);
       }
     }
   }
 
-  return { deck: newArray, preGameCards };
+  return { deck: cards, preGameCards };
 }
 
 export const shuffleDeck = (cards: number[][]) => {
-  const newArray = [...cards];
-
-  for (let index = 0; index < newArray.length; index++) {
-    let swapIndex = index + Math.floor(Math.random() * (newArray.length - index));
-    let tmp = newArray[index];
-    newArray[index] = newArray[swapIndex];
-    newArray[swapIndex] = tmp;
+  for (let index = 0; index < cards.length; index++) {
+    let swapIndex = index + Math.floor(Math.random() * (cards.length - index));
+    let tmp = cards[index];
+    cards[index] = cards[swapIndex];
+    cards[swapIndex] = tmp;
   }
 
-  return newArray;
+  return cards;
 }
+
+const getFeatures = (possibleSet: number[][]) => {
+  const color: number[] = [];
+  const number: number[] = [];
+  const shape: number[] = [];
+  const shading: number[] = [];
+
+  possibleSet.forEach(element => {
+    color.push(element[0])
+    number.push(element[1])
+    shape.push(element[2])
+    shading.push(element[3])
+  });
+
+  return [
+    arrSum(color) % 3,
+    arrSum(number) % 3,
+    arrSum(shape) % 3,
+    arrSum(shading) % 3,
+  ];
+}
+
+export const validatePossibleSet = (
+  selectedSet: number[],
+  cardsOnBoard: number[][],
+) => {
+  const cards = selectedSet.map(index => cardsOnBoard[index]);
+  return isSet(getFeatures(cards));
+};
