@@ -10,6 +10,7 @@ const GameBoard = () => {
   const [notificationMessage, setNotificationMessage] = useState<{ type: string, message: string }|null>(null);
 
   const {
+    deck,
     selectedSet,
     initializeGame,
     cardsOnBoard,
@@ -17,6 +18,7 @@ const GameBoard = () => {
     selectCard,
     registerSet,
     clearSelectedSet,
+    replaceCards,
   } = useContext(Context) as ContextValues;
 
   useEffect(() => {
@@ -37,6 +39,9 @@ const GameBoard = () => {
           setNotificationMessage({ type: 'success', message: 'Ahuevo! Encontrastre un SET' });
           registerSet(possibleSet); // Register set finded by user
           clearSelectedSet(); // Clear possible set selected by user
+          
+          // replace cards
+          replaceCards(possibleSet);
         } else {
           clearSelectedSet(); // Clear possible set selected by user
           setNotificationMessage({ type: 'warning', message: 'Nee! La cagaste wey, checale bien' });
@@ -62,7 +67,7 @@ const GameBoard = () => {
                 onClick={() => onSelectCard(index)} />) }
         </div>
         <div className="py-2 flex items-center text-gray-400">
-          <span className="inline-block font-semibold mr-2 text-lg text-white">69</span>
+          <span className="inline-block font-semibold mr-2 text-lg text-white">{deck.length}</span>
           tarjetas restantes
         </div>
       </div>

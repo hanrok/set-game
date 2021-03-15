@@ -11,6 +11,7 @@ export type ContextValues = {
   selectCard: (index: number) => number[];
   clearSelectedSet: () => void;
   registerSet: (set: number[]) => void;
+  replaceCards: (cardIndexes: number[]) => void;
 }
 
 // Creating a new context
@@ -56,6 +57,26 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
   // Function to clear the possible set selected by user
   const clearSelectedSet = () => updateSelectedSet([]);
 
+  const replaceCards = (cardsIndexes: number[]) => {
+    const currentCardsOnBoard = [...cardsOnBoard];
+    const currentDeck = [...deck];
+
+    if (currentDeck.length > 0) {
+      cardsIndexes.forEach((cardIndex) => {
+        const card = currentDeck.pop() as number[];
+        currentCardsOnBoard.splice(cardIndex, 1, card);
+      });
+    } else {
+      // TODO: What happend if deck is empty?
+      cardsIndexes.forEach((cardIndex) => {
+        currentCardsOnBoard.splice(cardIndex, 1);
+      });
+    }
+
+    setCardsOnBoard(currentCardsOnBoard);
+    setDeck(currentDeck);
+  }
+
   return <Context.Provider value={{
     deck,
     sets,
@@ -66,6 +87,7 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
     selectCard,
     clearSelectedSet,
     registerSet,
+    replaceCards,
   }}>
     { children }
   </Context.Provider>
