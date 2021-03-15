@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Context, ContextValues } from "./Context";
 import { validatePossibleSet } from "@/utils/index";
 
@@ -13,7 +13,6 @@ const GameBoard = () => {
   const {
     deck,
     selectedSet,
-    initializeGame,
     cardsOnBoard,
     unselectCard,
     selectCard,
@@ -21,10 +20,6 @@ const GameBoard = () => {
     clearSelectedSet,
     replaceCards,
   } = useContext(Context) as ContextValues;
-
-  useEffect(() => {
-    initializeGame();
-  }, []);
 
   const onSelectCard = (index: number) => {
     const selected = selectedSet.indexOf(index);

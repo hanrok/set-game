@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { generateCards, setCardsOnTable, shuffleDeck } from "@/utils/index";
 
 export type ContextValues = {
@@ -22,6 +22,10 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
   const [cardsOnBoard, setCardsOnBoard] = useState<number[][]>([]); // State to store the current cards on board
   const [selectedSet, updateSelectedSet] = useState<number[]>([]); // State to store the cards selected by user
   const [sets, addSet] = useState<number[][][]>([]); // State to store the sets
+
+  useEffect(() => {
+    initializeGame();
+  }, []);
 
   const initializeGame = () => {
     const cards = generateCards();
