@@ -24,8 +24,8 @@ const Timer = () => {
 
   const padNumber = (num: number): string => num.toString().padStart(2, '0');
 
-  return <div className="flex items-center text-white text-xl">
-    <svg className="text-red-500 mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
+  return <div className="flex align-middle items-center text-white text-3xl">
+    <svg className="inline-block text-yellow-500 mr-2" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
       <circle cx="12" cy="12" r="10"></circle>
       <path d="M12 6L12 12 16 14"></path>
     </svg>
