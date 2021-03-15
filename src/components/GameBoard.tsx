@@ -28,14 +28,14 @@ const GameBoard = () => {
     if (selected >= 0) {
       unselectCard(index);
     } else if(selected < 0 && selectedSet.length < 3) {
-      const currentSelectedSet = selectCard(index);
-      if (currentSelectedSet.length === 3) {
+      const possibleSet = selectCard(index);
+      if (possibleSet.length === 3) { // If three cards were chosen, we proceed to evaluate the cards
         setShowNotification(true); // Show the notification message
         setTimeout(() => setShowNotification(false), 4000); // Dismiss notification after 4 seconds
 
-        if (validatePossibleSet(currentSelectedSet, cardsOnBoard)) {
+        if (validatePossibleSet(possibleSet, cardsOnBoard)) {
           setNotificationMessage({ type: 'success', message: 'Ahuevo! Encontrastre un SET' });
-          registerSet(currentSelectedSet); // Register set finded by user
+          registerSet(possibleSet); // Register set finded by user
           clearSelectedSet(); // Clear possible set selected by user
         } else {
           clearSelectedSet(); // Clear possible set selected by user
