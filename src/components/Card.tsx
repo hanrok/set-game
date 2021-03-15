@@ -1,5 +1,10 @@
+import classNames from "classnames";
+import React from "react";
+
 interface ICardProps {
   config: number[];
+  selected?: boolean;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const createImages = (config: number[]) => {
@@ -8,15 +13,22 @@ const createImages = (config: number[]) => {
 
   for (let i = 0; i < n; i++) {
     shapes.push(
-      <img key={i} alt="shape" src={`/assets/svg/${[shape, color, shading].toString()}.svg`} />
+      <img className="" key={i} alt="shape" src={`/assets/svg/${[shape, color, shading].toString()}.svg`} />
     );
   }
 
   return shapes;
 }
 
-const Card = ({ config }: ICardProps) => {
-  return <button className="p-6 bg-gray-200 rounded-sm flex space-x-4 justify-center items-center">
+const Card = ({ selected = false, config, onClick }: ICardProps) => {
+  const className = classNames("p-6 bg-gray-200 rounded flex space-x-4 justify-center items-center", {
+    "ring": selected,
+    "ring-offset-gray-800": selected,
+    "ring-yellow-300": selected,
+    "ring-offset-2": selected,
+  });
+
+  return <button onClick={onClick} className={className}>
     { createImages(config) }
   </button>;
 };
