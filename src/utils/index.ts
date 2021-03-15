@@ -14,6 +14,31 @@ export const generateCards = () => {
   return cards;
 };
 
-// export const shuffleDeck = (cards) => {
-//   // TODO
-// }
+export const setCardsOnTable = (cards: number[][]) => {
+  const newArray = [...cards];
+  const preGameCards: number[][] = [];
+
+  for (let r = 0; r < 3; r++) {
+    for (let c = 0; c < 4; c++) {
+      if (newArray.length > 0) {
+        const card = newArray.pop() as number[];
+        preGameCards.push(card);
+      }
+    }
+  }
+
+  return { deck: newArray, preGameCards };
+}
+
+export const shuffleDeck = (cards: number[][]) => {
+  const newArray = [...cards];
+
+  for (let index = 0; index < newArray.length; index++) {
+    let swapIndex = index + Math.floor(Math.random() * (newArray.length - index));
+    let tmp = newArray[index];
+    newArray[index] = newArray[swapIndex];
+    newArray[swapIndex] = tmp;
+  }
+
+  return newArray;
+}
