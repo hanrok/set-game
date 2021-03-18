@@ -4,7 +4,7 @@ import { generateCards, setCardsOnTable, shuffleDeck, countSets } from "@/utils/
 export type ContextValues = {
   deck: number[][];
   sets: number[][][];
-  nsets: number[][][];
+  nsets: number[][][] | null;
   cardsOnBoard: number[][];
   selectedSet: number[];
   initializeGame: () => void;
@@ -13,6 +13,7 @@ export type ContextValues = {
   clearSelectedSet: () => void;
   registerSet: (set: number[]) => void;
   replaceCards: (cardIndexes: number[]) => void;
+  addThreeCards: () => void;
 }
 
 // Creating a new context
@@ -24,16 +25,13 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
   const [cardsOnBoard, setCardsOnBoard] = useState<number[][]>([]); // State to store the current cards on board
   const [selectedSet, updateSelectedSet] = useState<number[]>([]); // State to store the cards selected by user
   const [sets, addSet] = useState<number[][][]>([]); // State to store the sets
-  const [nsets, registerNumberOfSets] = useState<number[][][]>([]);
+  const [nsets, registerNumberOfSets] = useState<number[][][]|null>(null);
 
   useEffect(() => {
     if (!isRunning) {
       startGame(true);
       initializeGame();
     }
-
-    const { sets } = countSets(cardsOnBoard);
-    registerNumberOfSets(sets);
   }, [cardsOnBoard, isRunning]);
 
   const initializeGame = () => {
@@ -43,6 +41,9 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
 
     setDeck(deck);
     setCardsOnBoard(preGameCards);
+
+    const { sets } = countSets(preGameCards);
+    registerNumberOfSets(sets);
   }
 
   // Function to unselect a selected card 
@@ -74,19 +75,48 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
     const currentCardsOnBoard = [...cardsOnBoard];
     const currentDeck = [...deck];
 
-    if (currentDeck.length > 0) {
-      cardsIndexes.forEach((cardIndex) => {
-        const card = currentDeck.pop() as number[];
-        currentCardsOnBoard.splice(cardIndex, 1, card);
-      });
-    } else {
+    if (currentCardsOnBoard.length > 12) {
       cardsIndexes.forEach((cardIndex) => {
         currentCardsOnBoard.splice(cardIndex, 1);
       });
+    } else {
+      if (currentDeck.length > 0) {
+        cardsIndexes.forEach((cardIndex) => {
+          const card = currentDeck.pop() as number[];
+          currentCardsOnBoard.splice(cardIndex, 1, card);
+        });
+      } else {
+        cardsIndexes.forEach((cardIndex) => {
+          currentCardsOnBoard.splice(cardIndex, 1);
+        });
+      }
+    }
+    
+
+    setCardsOnBoard(currentCardsOnBoard);
+    setDeck(currentDeck);
+
+    countPossibleSets(currentCardsOnBoard);
+  }
+
+  const countPossibleSets = (board: number[][]) => {
+    const { sets } = countSets(board);
+    registerNumberOfSets(sets);
+  }
+
+  const addThreeCards = () => {
+    const currentCardsOnBoard = [...cardsOnBoard];
+    const currentDeck = [...deck];
+    
+    for (let i = 0; i < 3; i++) {
+      const card = currentDeck.pop() as number[];
+      currentCardsOnBoard.push(card)
     }
 
     setCardsOnBoard(currentCardsOnBoard);
     setDeck(currentDeck);
+
+    countPossibleSets(currentCardsOnBoard);
   }
 
   return <Context.Provider value={{
@@ -101,6 +131,7 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
     clearSelectedSet,
     registerSet,
     replaceCards,
+    addThreeCards,
   }}>
     { children }
   </Context.Provider>
