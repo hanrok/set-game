@@ -40,7 +40,6 @@ const GameBoard = () => {
           setNotificationMessage({ type: 'success', message: 'Enhorabuena! Haz encontrado un SET' });
           registerSet(possibleSet); // Register set finded by user
           clearSelectedSet(); // Clear possible set selected by user
-          
           // replace cards
           replaceCards(possibleSet);
         } else {
@@ -57,9 +56,10 @@ const GameBoard = () => {
         { showNotification
           ? <Alert type={notificationMessage?.type} message={notificationMessage?.message} />
           : <Alert message={<>
-            <span className="font-semibold px-2 py-1 rounded bg-gray-700 text-gray-300 mr-1">✨ Regla mágica:</span> Si dos cartas son... y una no es, entonces no es un <span className="font-semibold">SET</span>
+            <span className="font-semibold px-2 py-1 rounded bg-gray-700 text-gray-300 mr-1">
+              ✨ Regla mágica:</span> Si dos cartas son... y una no es, entonces no es un <span className="font-semibold">SET</span>
           </>} /> }
-        <div className="grid grid-cols-4 gap-x-5 gap-y-6 mb-2">
+        <div className="grid grid-cols-3 gap-x-5 gap-y-6 mb-2">
           { cardsOnBoard.map((card, index) => 
               <Card
                 selected={selectedSet.indexOf(index) !== -1}
@@ -74,7 +74,7 @@ const GameBoard = () => {
           </div>
           <div className="flex items-center">
             Set Posibles: 
-            <span className="inline-block font-semibold ml-2 text-lg text-white">{nsets.length}</span>
+            <span className="inline-block font-semibold ml-2 text-lg text-white">{nsets?.length}</span>
           </div>
         </div>
       </div>
