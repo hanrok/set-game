@@ -21,7 +21,7 @@ const createImages = (config: number[]) => {
 }
 
 const Card = ({ selected = false, config, onClick }: ICardProps) => {
-  const className = classNames("p-6 bg-gray-200 rounded flex space-x-4 justify-center items-center", {
+  const className = classNames("py-10 px-6 bg-gray-200 rounded flex space-x-4 justify-center items-center", {
     "ring": selected,
     "ring-offset-gray-800": selected,
     "ring-yellow-300": selected,
