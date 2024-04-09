@@ -3,10 +3,14 @@ import { arrSum, isSet } from "./common";
 export const generateCards = () => {
   const cards = [];
 
-  for (let i = 1; i <= 3; i++) { // Shape property
-    for (let j = 1; j <= 3; j++) { // Color property
-      for (let k = 1; k <= 3; k++) { // Number property
-        for (let l = 1; l <= 3; l++) { // Shading property
+  for (let i = 1; i <= 3; i++) {
+    // Shape property
+    for (let j = 1; j <= 3; j++) {
+      // Color property
+      for (let k = 1; k <= 3; k++) {
+        // Number property
+        for (let l = 1; l <= 3; l++) {
+          // Shading property
           cards.push([i, j, k, l]);
         }
       }
@@ -29,7 +33,7 @@ export const setCardsOnTable = (cards: number[][]) => {
   }
 
   return { deck: cards, preGameCards };
-}
+};
 
 export const shuffleDeck = (cards: number[][]) => {
   for (let index = 0; index < cards.length; index++) {
@@ -40,7 +44,7 @@ export const shuffleDeck = (cards: number[][]) => {
   }
 
   return cards;
-}
+};
 
 const getFeatures = (possibleSet: number[][]) => {
   const color: number[] = [];
@@ -48,26 +52,18 @@ const getFeatures = (possibleSet: number[][]) => {
   const shape: number[] = [];
   const shading: number[] = [];
 
-  possibleSet.forEach(element => {
-    color.push(element[0])
-    number.push(element[1])
-    shape.push(element[2])
-    shading.push(element[3])
+  possibleSet.forEach((element) => {
+    color.push(element[0]);
+    number.push(element[1]);
+    shape.push(element[2]);
+    shading.push(element[3]);
   });
 
-  return [
-    arrSum(color) % 3,
-    arrSum(number) % 3,
-    arrSum(shape) % 3,
-    arrSum(shading) % 3,
-  ];
-}
+  return [arrSum(color) % 3, arrSum(number) % 3, arrSum(shape) % 3, arrSum(shading) % 3];
+};
 
-export const validatePossibleSet = (
-  selectedSet: number[],
-  cardsOnBoard: number[][],
-) => {
-  const cards = selectedSet.map(index => cardsOnBoard[index]);
+export const validatePossibleSet = (selectedSet: number[], cardsOnBoard: number[][]) => {
+  const cards = selectedSet.map((index) => cardsOnBoard[index]);
   return isSet(getFeatures(cards));
 };
 
@@ -88,4 +84,4 @@ export const countSets = (cards: number[][]) => {
   }
 
   return { size, sets };
-}
+};
