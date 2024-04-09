@@ -1,6 +1,5 @@
 import "tailwindcss/tailwind.css";
 import { Metadata } from "next";
-import Header from "../components/partials/Header";
 
 export const metadata: Metadata = {
   title: "Next.js",
