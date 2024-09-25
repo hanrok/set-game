@@ -9,7 +9,7 @@ const Header = () => {
   const { sets } = useContext(Context) as ContextValues;
 
   return (
-    <header className="pt-12 pb-2">
+    <header className="pt-2 pb-2">
       <div className="mx-auto px-6 md:px-8 lg:px-4 xl:px-0 max-w-screen-lg relative">
         <div className="flex justify-between items-center">
           <div>

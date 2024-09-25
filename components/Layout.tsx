@@ -14,7 +14,7 @@ const Layout = ({ children }: ILayoutProps) => {
 
   return <>
     <Header />
-    <main className="py-4">
+    <main>
       {children}
     </main>
     { nsets?.length === 0 && <Modal onClick={handleEventModal} /> }

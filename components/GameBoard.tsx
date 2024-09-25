@@ -63,7 +63,7 @@ const GameBoard = () => {
               }
             />
           )}
-          <div className="grid grid-cols-3 gap-x-5 gap-y-6 mb-2">
+          <div className="grid grid-cols-3 gap-x-2 gap-y-2 mb-2">
             {cardsOnBoard.map((card, index) => (
               <Card selected={selectedSet.indexOf(index) !== -1} key={index} config={card} onClick={() => onSelectCard(index)} />
             ))}
