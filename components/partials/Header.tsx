@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <header className="pt-12 pb-2">
-      <div className="container mx-auto px-6 md:px-8 lg:px-4 xl:px-0 max-w-screen-lg relative">
+      <div className="mx-auto px-6 md:px-8 lg:px-4 xl:px-0 max-w-screen-lg relative">
         <div className="flex justify-between items-center">
           <div>
             <Logotype />

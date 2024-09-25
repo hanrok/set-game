@@ -48,10 +48,10 @@ const GameBoard = () => {
   const handleEventModal = () => addThreeCards();
 
   return (
-    <>
+    <div className="flex flex-col flex-grow">
       <Header />
-      <section className="py-4">
-        <div className="container mx-auto px-6 md:px-8 lg:px-4 xl:px-0 max-w-screen-lg relative">
+      <section className="flex flex-col px-4">
+        <div className="flex flex-col px-6 md:px-8 lg:px-4 xl:px-0">
           {showNotification ? (
             <Alert type={notificationMessage?.type} message={notificationMessage?.message} />
           ) : (
@@ -81,7 +81,7 @@ const GameBoard = () => {
         </div>
       </section>
       {nsets?.length === 0 && <Modal onClick={handleEventModal} />}
-    </>
+    </div>
   );
 };
 
