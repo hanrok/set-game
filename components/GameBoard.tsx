@@ -4,10 +4,12 @@ import { useContext, useState } from "react";
 import { Context, ContextValues } from "./Context";
 import { validatePossibleSet } from "@/utils";
 
+
 import Card from "./Card";
 import Alert from "./Alert";
 import Modal from "./Modal";
 import Header from "./partials/Header";
+import { CardType } from "@/app/models/card";
 
 const GameBoard = () => {
   const [showNotification, setShowNotification] = useState(false);
@@ -16,12 +18,12 @@ const GameBoard = () => {
 
   const { deck, nsets, addThreeCards, selectedSet, cardsOnBoard, unselectCard, selectCard, registerSet, clearSelectedSet, replaceCards } = useContext(Context) as ContextValues;
 
-  const onSelectCard = (index: number) => {
-    const selected = selectedSet.indexOf(index);
+  const onSelectCard = (tapCard: CardType) => {
+    const selected = selectedSet.indexOf(tapCard);
     if (selected >= 0) {
-      unselectCard(index);
+      unselectCard(tapCard);
     } else if (selected < 0 && selectedSet.length < 3) {
-      const possibleSet = selectCard(index);
+      const possibleSet = selectCard(tapCard);
       if (possibleSet.length === 3) {
         // If three cards were chosen, we proceed to evaluate the cards
         setShowNotification(true); // Show the notification message
@@ -31,7 +33,8 @@ const GameBoard = () => {
         const timer = setTimeout(() => setShowNotification(false), 4000); // Dismiss notification after 4 seconds
         setTimeoutId(timer);
 
-        if (validatePossibleSet(possibleSet, cardsOnBoard)) {
+        console.log("validatePossibleSet(possibleSet)", validatePossibleSet(possibleSet));
+        if (validatePossibleSet(possibleSet)) {
           setNotificationMessage({ type: "success", message: "Enhorabuena! Haz encontrado un SET" });
           registerSet(possibleSet); // Register set finded by user
           clearSelectedSet(); // Clear possible set selected by user
@@ -47,12 +50,17 @@ const GameBoard = () => {
 
   const handleEventModal = () => addThreeCards();
 
+  console.log("deck", deck);
+  console.log("nsets", nsets);
+  console.log("selectedSet", selectedSet);
+  console.log("cardsOnBoard", cardsOnBoard);
   return (
     <div className="flex flex-col flex-grow">
       <Header />
       <section className="flex flex-col px-4">
         <div className="flex flex-col px-6 md:px-8 lg:px-4 xl:px-0">
-          {showNotification ? (
+          {/* TODO: understand if relevant */}
+          {/* {showNotification ? (
             <Alert type={notificationMessage?.type} message={notificationMessage?.message} />
           ) : (
             <Alert
@@ -62,10 +70,10 @@ const GameBoard = () => {
                 </>
               }
             />
-          )}
+          )} */}
           <div className="grid grid-cols-3 gap-x-2 gap-y-2 mb-2">
             {cardsOnBoard.map((card, index) => (
-              <Card selected={selectedSet.indexOf(index) !== -1} key={index} config={card} onClick={() => onSelectCard(index)} />
+              <Card selected={selectedSet.indexOf(card) !== -1} key={index} config={card} onClick={() => onSelectCard(card)} />
             ))}
           </div>
           <div className="py-2 flex items-center justify-between text-gray-400">

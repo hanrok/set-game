@@ -1,8 +1,9 @@
 import cn from "clsx";
 import React from "react";
+import { CardType as CardType } from "@/app/models/card";
 
 interface ICardProps {
-  config: number[];
+  config: CardType;
   selected?: boolean;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
@@ -28,7 +29,8 @@ const Card = ({ selected = false, config, onClick }: ICardProps) => {
 
   return (
     <button onClick={onClick} className={className}>
-      {createImages(config)}
+      {config.name}
+      {/* {createImages(config)} */}
     </button>
   );
 };
