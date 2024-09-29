@@ -1,4 +1,4 @@
-import { CardType } from "@/app/models/card";
+import { CardType } from "@/models/card";
 
 // TODO: understand if we want to give more feature than just the category of the products
 // export const isSet = (features: number[]): boolean => arrSum(features) === 0;

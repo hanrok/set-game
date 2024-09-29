@@ -1,4 +1,4 @@
-import { CardType } from "@/app/models/card";
+import { CardType } from "@/models/card";
 import { arrSum, isSet } from "./common";
 
 export const generateCards = () => {

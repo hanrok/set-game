@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { generateCards, setCardsOnTable, shuffleDeck, countSets } from "@/utils/index";
 import cardsList from "cards.json";
-import { CardType } from "@/app/models/card";
+import { CardType } from "@/models/card";
 
 export type ContextValues = {
   deck: CardType[];
@@ -16,6 +16,8 @@ export type ContextValues = {
   registerSet: (set: CardType[]) => void;
   replaceCards: (cardIndexes: CardType[]) => void;
   addThreeCards: () => void;
+  gameOver: boolean,
+  endGame: () => void
 }
 
 // Creating a new context
@@ -27,6 +29,7 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
   const [cardsOnBoard, setCardsOnBoard] = useState<CardType[]>([]); // store the current cards on board
   const [selectedSet, updateSelectedSet] = useState<CardType[]>([]); // store the cards selected by user
   const [sets, setSet] = useState<CardType[][]>([]); // store the sets
+  const [gameOver, setGameOver] = useState<boolean>(false);
 
   // what is it for?
   const [nsets, registerNumberOfSets] = useState<CardType[][]|null>(null);
@@ -127,6 +130,10 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
     countPossibleSets(currentCardsOnBoard);
   }
 
+  const endGame = () => {
+    setGameOver(true);
+  }
+
   return <Context.Provider value={{
     deck,
     sets,
@@ -140,6 +147,8 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
     registerSet,
     replaceCards,
     addThreeCards,
+    gameOver,
+    endGame,
   }}>
     { children }
   </Context.Provider>

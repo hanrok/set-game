@@ -5,7 +5,9 @@ import Logotype from "@/components/Logotype";
 import Timer from "@/components/Timer";
 import { Context, ContextValues } from "../Context";
 
-const Header = () => {
+let GAME_TIME = 200
+
+const Header = ({onGameEnd}) => {
   const { sets } = useContext(Context) as ContextValues;
 
   return (
@@ -18,7 +20,7 @@ const Header = () => {
           <div className="py-2">
             <ul className="flex justify-end items-center space-x-4">
               <li>
-                <Timer />
+                <Timer gameTime={GAME_TIME} onGameEnd={onGameEnd} />
               </li>
               <li>
                 <div className="flex items-center text-white text-2xl w-16">

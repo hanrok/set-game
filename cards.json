@@ -1,252 +1,217 @@
 [
     {
-        "name": "CA 0",
-        "category": "CA 0",
-        "logo": ""
+        "name": "Snowflake",
+        "category": "DWH",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Snowflake_Logo.svg"
     },
     {
-        "name": "CA 0",
-        "category": "CA 0",
-        "logo": ""
+        "name": "Databricks",
+        "category": "DWH",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/6/63/Databricks_Logo.png"
     },
     {
-        "name": "CA 0",
-        "category": "CA 0",
-        "logo": ""
+        "name": "Redshift",
+        "category": "DWH",
+        "logo": "https://cdn.worldvectorlogo.com/logos/aws-redshift-logo.svg"
     },
     {
-        "name": "CA 0",
-        "category": "CA 0",
-        "logo": ""
+        "name": "Bigquery",
+        "category": "DWH",
+        "logo": "https://www.vectorlogo.zone/logos/google_bigquery/google_bigquery-icon.svg"
     },
     {
-        "name": "CA 0",
-        "category": "CA 0",
-        "logo": ""
+        "name": "Tableau",
+        "category": "BI",
+        "logo": "https://www.svgrepo.com/show/354428/tableau-icon.svg"
     },
     {
-        "name": "CA 0",
-        "category": "CA 0",
-        "logo": ""
+        "name": "Looker",
+        "category": "BI",
+        "logo": "https://www.svgrepo.com/show/354012/looker-icon.svg"
     },
     {
-        "name": "CA 0",
-        "category": "CA 0",
-        "logo": ""
+        "name": "Power BI",
+        "category": "BI",
+        "logo": "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/power-bi-icon.svg"
     },
     {
-        "name": "CA 0",
-        "category": "CA 0",
-        "logo": ""
+        "name": "Sigma",
+        "category": "BI",
+        "logo": "https://cdn.prod.website-files.com/666bbba4ff7240a20f4ccccf/666bbba4ff7240a20f4ccd33_logo-sigma-black.svg"
     },
     {
-        "name": "CA 0",
-        "category": "CA 0",
-        "logo": ""
+        "name": "Thougthspot",
+        "category": "BI",
+        "logo": "https://www.thoughtspot.com/images/logo-black-with-r.svg"
     },
     {
-        "name": "CA 0",
-        "category": "CA 0",
-        "logo": ""
+        "name": "Lightdash",
+        "category": "Open source BI",
+        "logo": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle'>LD</text></svg>"
     },
     {
-        "name": "CA 1",
-        "category": "CA 1",
-        "logo": ""
+        "name": "Metabase",
+        "category": "Open source BI",
+        "logo": "https://www.vectorlogo.zone/logos/metabase/metabase-icon.svg"
     },
     {
-        "name": "CA 1",
-        "category": "CA 1",
-        "logo": ""
+        "name": "Preset",
+        "category": "Open source BI",
+        "logo": "https://avatars.githubusercontent.com/u/45908173?s=280&v=4"
     },
     {
-        "name": "CA 1",
-        "category": "CA 1",
-        "logo": ""
+        "name": "Alation",
+        "category": "Catalog",
+        "logo": "https://www.alation.com/_next/image/?url=https%3A%2F%2Fimages.ctfassets.net%2F7p3vnbbznfiw%2F4bYcA2ZQMWxCwL5hKXxvZl%2Ff3772db87ede0d90dd1633d38473139e%2FAlation-Favicon-Orange-510x510.png&w=640&q=75"
     },
     {
-        "name": "CA 1",
-        "category": "CA 1",
-        "logo": ""
+        "name": "Collibra",
+        "category": "Catalog",
+        "logo": "https://www.collibra.com/mfe/nav/assets/icons/logo.svg"
     },
     {
-        "name": "CA 1",
-        "category": "CA 1",
-        "logo": ""
+        "name": "data.world",
+        "category": "Catalog",
+        "logo": "https://cdn.brandfetch.io/idFD6X6RbB/w/400/h/400/theme/dark/icon.jpeg?k=id64Mup7ac&t=1720754757770"
     },
     {
-        "name": "CA 1",
-        "category": "CA 1",
-        "logo": ""
+        "name": "Atlan",
+        "category": "Catalog",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Atlan-logo-full.svg/512px-Atlan-logo-full.svg.png?20210322110300"
     },
     {
-        "name": "CA 1",
-        "category": "CA 1",
-        "logo": ""
+        "name": "select.star",
+        "category": "Catalog",
+        "logo": "https://cdn.prod.website-files.com/61781d672fbf5e174e487703/662db7ccadb5dcfda26c5cf4_Select%20Star%20Logo%20-%20Vertical%20-%20Magenta%20%26%20Dark.svg"
     },
     {
-        "name": "CA 1",
-        "category": "CA 1",
-        "logo": ""
+        "name": "Fivetran",
+        "category": "ETL",
+        "logo": "https://www.vectorlogo.zone/logos/fivetran/fivetran-icon.svg"
     },
     {
-        "name": "CA 1",
-        "category": "CA 1",
-        "logo": ""
+        "name": "Airbyte",
+        "category": "ETL",
+        "logo": "https://getlogo.net/wp-content/uploads/2023/06/airbyte-inc-logo-vector.png"
     },
     {
-        "name": "CA 1",
-        "category": "CA 1",
-        "logo": ""
+        "name": "Stitch",
+        "category": "ETL",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 2",
-        "category": "CA 2",
-        "logo": ""
+        "name": "Talend",
+        "category": "ETL",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 2",
-        "category": "CA 2",
-        "logo": ""
+        "name": "MySQL",
+        "category": "Transactional DB",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 2",
-        "category": "CA 2",
-        "logo": ""
+        "name": "Postgres",
+        "category": "Transactional DB",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 2",
-        "category": "CA 2",
-        "logo": ""
+        "name": "MS SQL",
+        "category": "Transactional DB",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 2",
-        "category": "CA 2",
-        "logo": ""
+        "name": "Trino",
+        "category": "Data Lake engine",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 2",
-        "category": "CA 2",
-        "logo": ""
+        "name": "Starburst",
+        "category": "Data Lake engine",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 2",
-        "category": "CA 2",
-        "logo": ""
+        "name": "Dremio",
+        "category": "Data Lake engine",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 2",
-        "category": "CA 2",
-        "logo": ""
+        "name": "Airflow",
+        "category": "Orchestrator",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 2",
-        "category": "CA 2",
-        "logo": ""
+        "name": "Prefect",
+        "category": "Orchestrator",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 2",
-        "category": "CA 2",
-        "logo": ""
+        "name": "Dagster",
+        "category": "Orchestrator",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 3",
-        "category": "CA 3",
-        "logo": ""
+        "name": "GCS",
+        "category": "Cloud storage",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 3",
-        "category": "CA 3",
-        "logo": ""
+        "name": "S3",
+        "category": "Cloud storage",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 3",
-        "category": "CA 3",
-        "logo": ""
+        "name": "Azure Blob",
+        "category": "Cloud storage",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 3",
-        "category": "CA 3",
-        "logo": ""
+        "name": "Elementary",
+        "category": "Data observability",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 3",
-        "category": "CA 3",
-        "logo": ""
+        "name": "Monte Carlo",
+        "category": "Data observability",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 3",
-        "category": "CA 3",
-        "logo": ""
+        "name": "Metaplane",
+        "category": "Data observability",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 3",
-        "category": "CA 3",
-        "logo": ""
+        "name": "BigEye",
+        "category": "Data observability",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 3",
-        "category": "CA 3",
-        "logo": ""
+        "name": "Github",
+        "category": "Code repos",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 3",
-        "category": "CA 3",
-        "logo": ""
+        "name": "Gitlab",
+        "category": "Code repos",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 3",
-        "category": "CA 3",
-        "logo": ""
+        "name": "Bitbucket",
+        "category": "Code repos",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 4",
-        "category": "CA 4",
-        "logo": ""
+        "name": "dbt",
+        "category": "Data transformation",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 4",
-        "category": "CA 4",
-        "logo": ""
+        "name": "dbt",
+        "category": "Data transformation",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     },
     {
-        "name": "CA 4",
-        "category": "CA 4",
-        "logo": ""
-    },
-    {
-        "name": "CA 4",
-        "category": "CA 4",
-        "logo": ""
-    },
-    {
-        "name": "CA 4",
-        "category": "CA 4",
-        "logo": ""
-    },
-    {
-        "name": "CA 4",
-        "category": "CA 4",
-        "logo": ""
-    },
-    {
-        "name": "CA 4",
-        "category": "CA 4",
-        "logo": ""
-    },
-    {
-        "name": "CA 4",
-        "category": "CA 4",
-        "logo": ""
-    },
-    {
-        "name": "CA 4",
-        "category": "CA 4",
-        "logo": ""
-    },
-    {
-        "name": "CA 4",
-        "category": "CA 4",
-        "logo": ""
+        "name": "dbt",
+        "category": "Data transformation",
+        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
     }
 ]
