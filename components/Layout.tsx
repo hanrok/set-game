@@ -13,8 +13,8 @@ const Layout = ({ children }: ILayoutProps) => {
   const handleEventModal = () => addThreeCards();
 
   return <>
-    <Header />
-    <main>
+    {/* <Header onGameEnd={onGameEnd} /> */}
+    <main className="py-4">
       {children}
     </main>
     { nsets?.length === 0 && <Modal onClick={handleEventModal} /> }
