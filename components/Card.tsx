@@ -20,7 +20,8 @@ const createImages = (config: number[]) => {
 };
 
 const Card = ({ selected = false, config, onClick }: ICardProps) => {
-  const className = cn("text-gray-900 py-2 px-2 bg-gray-200 rounded flex justify-center items-center", {
+  const className = cn("text-gray-900 py-2 px-2 rounded flex justify-center items-center", {
+    "bg-gray-200": !selected,
     "ring-1": selected,
     "ring-offset-cyan-700": selected,
     "ring-offset-2": selected,
