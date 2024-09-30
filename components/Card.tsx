@@ -1,3 +1,5 @@
+'use client'
+
 import cn from "clsx";
 import React from "react";
 import { CardType as CardType } from "@/models/card";
