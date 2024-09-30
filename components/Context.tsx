@@ -1,9 +1,9 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { generateCards, setCardsOnTable, shuffleDeck, countSets } from "@/utils/index";
+import { setCardsOnTable, shuffleDeck, countSets } from "@/utils/index";
 import cardsList from "cards.json";
 import { CardType } from "@/models/card";
 
-const GAME_TIME = 60
+const GAME_TIME = 600
 
 export type ContextValues = {
   deck: CardType[];

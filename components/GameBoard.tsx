@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import { useContext, useEffect, useState } from "react";
 import { Context, ContextValues } from "./Context";
@@ -49,6 +49,7 @@ const GameBoard = () => {
           // check if there is no sets in the deck with the cards on board
           const allCards = [...deck, ...cardsOnBoard];
           let {size} = countSets(allCards)
+          console.log("left possible sets", allCards, size);
           if (size > 0) {
             // replace cards
             replaceCards(possibleSet);
