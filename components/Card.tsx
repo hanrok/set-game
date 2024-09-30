@@ -21,14 +21,14 @@ const createImages = (config: number[]) => {
   return shapes;
 };
 
-const Card = ({ selected = false, config, onClick }: ICardProps) => {
+const Card = ({ config, onClick }: ICardProps) => {
   const className = cn("text-gray-900 py-2 px-2 rounded flex justify-center items-center", {
-    "bg-gray-200": !selected,
-    "ring-1": selected,
-    "ring-offset-cyan-700": selected,
-    "ring-offset-2": selected,
-    "bg-cyan-800": selected,
-    "text-white": selected,
+    "bg-gray-200": !config.selected,
+    "ring-1": config.selected,
+    "ring-offset-cyan-700": config.selected,
+    "ring-offset-2": config.selected,
+    "bg-cyan-800": config.selected,
+    "text-white": config.selected,
   });
 
   return (

@@ -109,11 +109,14 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
   }
 
   // Function to unselect a selected card 
-  const unselectCard = (cardTap: CardType) => 
+  const unselectCard = (cardTap: CardType) => {
+    cardTap.selected = false;
     updateSelectedSet(selectedSet => selectedSet.filter(c => c !== cardTap));
+  };
 
   // Function to add the selected card to array with selected cards
   const selectCard = (cardTap: CardType): CardType[] => {
+    cardTap.selected = true;
     const newArray = [...selectedSet, cardTap];
     updateSelectedSet(newArray);
 
@@ -130,7 +133,10 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
   }
 
   // Function to clear the possible set selected by user
-  const clearSelectedSet = () => updateSelectedSet([]);
+  const clearSelectedSet = () => {
+    setCardsOnBoard(cards => cards.map(c => {c.selected = false; return c}));
+    updateSelectedSet([]);
+  };
 
   const replaceCards = (cards: CardType[]) => {
     const cardsIndexes: number[] = cardsOnBoard.map((card, idx) => ([card, idx])).filter((item) => cards.includes(item[0] as CardType)).map(item => item[1] as number);

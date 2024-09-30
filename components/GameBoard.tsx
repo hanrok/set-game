@@ -26,10 +26,10 @@ const GameBoard = () => {
   }, [nsets]);
 
   const onSelectCard = (tapCard: CardType) => {
-    const selected = selectedSet.indexOf(tapCard);
-    if (selected >= 0) {
+    if (tapCard.selected) {
       unselectCard(tapCard);
-    } else if (selected < 0 && selectedSet.length < 3) {
+    } else if (selectedSet.length < 3) {
+      console.log("selectedSet", selectedSet);
       const possibleSet = selectCard(tapCard);
       if (possibleSet.length === 3) {
         // If three cards were chosen, we proceed to evaluate the cards
@@ -113,7 +113,7 @@ const GameBoard = () => {
               )} */}
               <div className="grid grid-cols-3 gap-x-2 gap-y-2 mb-2">
                 {cardsOnBoard.map((card, index) => (
-                  <Card selected={selectedSet.indexOf(card) !== -1} key={index} config={card} onClick={() => onSelectCard(card)} />
+                  <Card key={index} config={card} onClick={() => onSelectCard(card)} />
                 ))}
               </div>
               <div className="py-2 flex items-center justify-between text-gray-400">
