@@ -21,11 +21,10 @@ const createImages = (config: number[]) => {
 
 const Card = ({ selected = false, config, onClick }: ICardProps) => {
   const className = cn("text-gray-900 py-2 px-2 bg-gray-200 rounded flex justify-center items-center", {
-    // ring: selected,
-    // "ring-offset-gray-800": selected,
-    // "ring-yellow-300": selected,
-    // "ring-offset-2": selected,
-    "bg-cyan-600": selected,
+    "ring-1": selected,
+    "ring-offset-cyan-700": selected,
+    "ring-offset-2": selected,
+    "bg-cyan-800": selected,
     "text-white": selected,
   });
 
@@ -34,7 +33,8 @@ const Card = ({ selected = false, config, onClick }: ICardProps) => {
       <div className="flex flex-col items-center">
         <img src={config.logo} width="30" />
         <div className="text-sm mt-2 font-medium">
-          {config.name}
+          {/* {config.name} */}
+          {config.category}
         </div>
       </div>
       

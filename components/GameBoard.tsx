@@ -1,8 +1,8 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context, ContextValues } from "./Context";
-import { validatePossibleSet } from "@/utils";
+import { countSets, validatePossibleSet } from "@/utils";
 
 
 import Card from "./Card";
@@ -10,13 +10,20 @@ import Alert from "./Alert";
 import Modal from "./Modal";
 import Header from "./partials/Header";
 import { CardType } from "@/models/card";
+import Link from "next/link";
 
 const GameBoard = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState<{ type: string; message: string } | null>(null);
   const [timeoutId, setTimeoutId] = useState<any>(null);
 
-  const { deck, nsets, addThreeCards, selectedSet, cardsOnBoard, unselectCard, selectCard, registerSet, clearSelectedSet, replaceCards, endGame, gameOver } = useContext(Context) as ContextValues;
+  const { deck, nsets, addThreeCards, selectedSet, cardsOnBoard, unselectCard, selectCard, registerSet, clearSelectedSet, replaceCards, endGame, gameOver, resetGame } = useContext(Context) as ContextValues;
+
+  useEffect(() => {
+    if (nsets?.length === 0) {
+      console.log("no mas set");
+    }
+  }, [nsets]);
 
   const onSelectCard = (tapCard: CardType) => {
     const selected = selectedSet.indexOf(tapCard);
@@ -38,8 +45,17 @@ const GameBoard = () => {
           setNotificationMessage({ type: "success", message: "Enhorabuena! Haz encontrado un SET" });
           registerSet(possibleSet); // Register set finded by user
           clearSelectedSet(); // Clear possible set selected by user
-          // replace cards
-          replaceCards(possibleSet);
+          
+          // check if there is no sets in the deck with the cards on board
+          const allCards = [...deck, ...cardsOnBoard];
+          let {size} = countSets(allCards)
+          if (size > 0) {
+            // replace cards
+            replaceCards(possibleSet);
+          } else {
+            // there is no more sets in cards
+            endGame();
+          }
         } else {
           clearSelectedSet(); // Clear possible set selected by user
           setNotificationMessage({ type: "warning", message: "Ups! Este no es un SET, vuelve a intentarlo" });
@@ -50,22 +66,30 @@ const GameBoard = () => {
 
   const handleEventModal = () => addThreeCards();
 
-  console.log("deck", deck);
-  console.log("nsets", nsets);
-  console.log("selectedSet", selectedSet);
-  console.log("cardsOnBoard", cardsOnBoard);
+  // console.log("deck", deck);
+  // console.log("nsets", nsets);
+  // console.log("selectedSet", selectedSet);
+  // console.log("cardsOnBoard", cardsOnBoard);
+
   return (
     <div className="flex flex-col flex-grow">
-      <Header onGameEnd={endGame} />
+      <Header />
       {gameOver ? 
         <div className="flex flex-grow flex-col justify-start m-4">
           <div className="bg-gray-100 items-center text-center rounded-lg">
             <h2 className="text-gray-800 mb-4 pt-2 text-2xl font-bold">GAME OVER</h2>
             <div className="flex flex-col">
               <div>You got 31 Points!</div>
-              <div className="flex justify-around p-10">
-                <button className="bg-gray-900 text-white font-bold py-2 px-4 rounded-lg">Table score</button>
-                <button className="bg-gray-900 text-white font-bold py-2 px-4 rounded-lg">Register</button>
+              <div className="flex flex-col p-10 space-y-2">
+                <div className="flex flex-grow">
+                  <button className="flex-grow bg-gray-900 text-white font-bold py-2 px-4 rounded-lg" onClick={() => {console.log("clicked"); resetGame();}}>Play Again!</button>
+                </div>
+                <div className="flex justify-between space-x-2">
+                  <Link href="/scores">
+                    <button className="flex-grow bg-gray-900 text-white font-bold py-2 px-4 rounded-lg">Table score</button>
+                  </Link>
+                  <button className="flex-grow bg-gray-900 text-white font-bold py-2 px-4 rounded-lg">Register</button>
+                </div>
               </div>
             </div>
           </div>
@@ -103,7 +127,8 @@ const GameBoard = () => {
               </div>
             </div>
           </section>
-          {nsets?.length === 0 && <Modal onClick={handleEventModal} />}
+          {/* TODO: understand what to do if there are no sets */}
+          {/* {nsets?.length === 0 && <Modal onClick={handleEventModal} />} */}
         </>
       }
     </div>

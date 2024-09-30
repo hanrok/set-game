@@ -27,7 +27,7 @@ export const setCardsOnTable = (cards: CardType[]) => {
   for (let r = 0; r < 3; r++) {
     for (let c = 0; c < 4; c++) {
       if (cards.length > 0) {
-        const card = cards.pop() as CardType;
+        const card = cards.shift() as CardType;
         preGameCards.push(card);
       }
     }
