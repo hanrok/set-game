@@ -4,11 +4,10 @@ export default {
   theme: {},
   plugins: [],
   safelist: [
-    {
-      pattern: /bg-(cyan)-(100|500|700|800)/, // You can display all the colors that you need
-    },
-    {
-      pattern: /ring-*/, // You can display all the colors that you need
-    },
+    "ring-1",
+    "ring-offset-cyan-700",
+    "ring-offset-2",
+    "bg-cyan-800",
+    "text-white",
   ],
 };
