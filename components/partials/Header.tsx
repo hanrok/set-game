@@ -1,7 +1,6 @@
 "use client";
 
 import { useContext } from "react";
-import Logotype from "@/components/Logotype";
 import Timer from "@/components/Timer";
 import { Context, ContextValues } from "../Context";
 import Link from "next/link";
