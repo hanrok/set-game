@@ -4,6 +4,7 @@ import { useContext } from "react";
 import Logotype from "@/components/Logotype";
 import Timer from "@/components/Timer";
 import { Context, ContextValues } from "../Context";
+import Link from "next/link";
 
 
 const Header = () => {
@@ -13,9 +14,9 @@ const Header = () => {
     <header className="pt-2 pb-2">
       <div className="mx-auto px-6 md:px-8 lg:px-4 xl:px-0 max-w-screen-lg relative">
         <div className="flex justify-between items-center">
-          <div>
-            <Logotype />
-          </div>
+          <Link href="/">
+            <img src={"/assets/svg/logo.svg"} alt="elementary" />
+          </Link>
           <div className="py-2">
             <ul className="flex justify-end items-center space-x-4">
               <li>

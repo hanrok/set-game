@@ -8,10 +8,13 @@
     "build": "next build"
   },
   "dependencies": {
+    "@designbycode/tailwindcss-text-stroke": "^1.2.1",
     "clsx": "^2.1.0",
+    "firebase": "^10.14.0",
     "next": "14.1.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "^5.3.0",
     "tailwindcss": "3.4.3"
   },
   "devDependencies": {
@@ -24,5 +27,8 @@
   "author": {
     "name": "Hanan Rokach",
     "email": "hananrok@gmail.com"
+  },
+  "overrides": {
+    "undici": "5.28.4"
   }
 }

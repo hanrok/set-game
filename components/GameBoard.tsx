@@ -3,6 +3,9 @@
 import { useContext, useEffect, useState } from "react";
 import { Context, ContextValues } from "./Context";
 import { countSets, validatePossibleSet } from "@/utils";
+import { FaPlayCircle } from "react-icons/fa";
+import { FaTable } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 
 
 import Card from "./Card";
@@ -17,7 +20,7 @@ const GameBoard = () => {
   const [notificationMessage, setNotificationMessage] = useState<{ type: string; message: string } | null>(null);
   const [timeoutId, setTimeoutId] = useState<any>(null);
 
-  const { deck, nsets, addThreeCards, selectedSet, cardsOnBoard, unselectCard, selectCard, registerSet, clearSelectedSet, replaceCards, endGame, gameOver, resetGame } = useContext(Context) as ContextValues;
+  const { deck, nsets, sets, addThreeCards, selectedSet, cardsOnBoard, unselectCard, selectCard, registerSet, clearSelectedSet, replaceCards, endGame, gameOver, resetGame } = useContext(Context) as ContextValues;
 
   useEffect(() => {
     if (nsets?.length === 0) {
@@ -76,20 +79,27 @@ const GameBoard = () => {
     <div className="flex flex-col flex-grow">
       <Header />
       {gameOver ? 
-        <div className="flex flex-grow flex-col justify-start m-4">
-          <div className="bg-gray-100 items-center text-center rounded-lg">
-            <h2 className="text-gray-800 mb-4 pt-2 text-2xl font-bold">GAME OVER</h2>
+        <div className="flex flex-grow flex-col justify-center m-4">
+          <div className="items-center text-center rounded">
+            <h2 className="text-white mb-20 pt-2 text-6xl font-bold text-stroke text-stroke-gray-200">GAME OVER!</h2>
             <div className="flex flex-col">
-              <div>You got 31 Points!</div>
+              <div className="text-white mb-10">You found <span className="font-bold text-3xl mx-2">{sets.length}</span> sets!</div>
               <div className="flex flex-col p-10 space-y-2">
                 <div className="flex flex-grow">
-                  <button className="flex-grow bg-gray-900 text-white font-bold py-2 px-4 rounded-lg" onClick={() => {console.log("clicked"); resetGame();}}>Play Again!</button>
+                  <button className="flex items-center justify-center bg-yellow-500 py-5 rounded-md text-white font-bold flex-grow" onClick={() => {console.log("clicked"); resetGame();}}>
+                    <FaPlayCircle className="mr-2" size={24} /> PLAY AGAIN!
+                  </button>
                 </div>
                 <div className="flex justify-between space-x-2">
                   <Link href="/scores">
-                    <button className="flex-grow bg-gray-900 text-white font-bold py-2 px-4 rounded-lg">Table score</button>
+                    <button className="flex items-center justify-center bg-green-500 py-5 px-5 rounded-md text-white font-bold flex-grow">
+                      <FaTable className="mr-2" size={24} /> SCORE TABLE
+                    </button>
                   </Link>
-                  <button className="flex-grow bg-gray-900 text-white font-bold py-2 px-4 rounded-lg">Register</button>
+                  {/* if user not logged in */}
+                  <button className="flex items-center justify-center bg-blue-500 py-5 px-5 rounded-md text-white font-bold flex-grow">
+                    <FaUserCircle className="mr-2" size={24} /> Register
+                  </button>
                 </div>
               </div>
             </div>
@@ -97,8 +107,8 @@ const GameBoard = () => {
         </div> 
       :
         <>
-          <section className="flex flex-col px-4">
-            <div className="flex flex-col px-6 md:px-8 lg:px-4 xl:px-0">
+          <section className="flex flex-col px-4 flex-grow justify-center">
+            <div className="flex flex-col px-6 md:px-8 lg:px-4 xl:px-0 flex-grow justify-center">
               {/* TODO: understand if relevant */}
               {/* {showNotification ? (
                 <Alert type={notificationMessage?.type} message={notificationMessage?.message} />
@@ -111,7 +121,7 @@ const GameBoard = () => {
                   }
                 />
               )} */}
-              <div className="grid grid-cols-3 gap-x-2 gap-y-2 mb-2">
+              <div className="grid grid-cols-3 gap-x-2 gap-y-2 my-4 flex-grow">
                 {cardsOnBoard.map((card, index) => (
                   <Card key={index} config={card} onClick={() => onSelectCard(card)} />
                 ))}

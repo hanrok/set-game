@@ -1,9 +1,11 @@
+'use client'
+
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { setCardsOnTable, shuffleDeck, countSets } from "@/utils/index";
 import cardsList from "cards.json";
 import { CardType } from "@/models/card";
 
-const GAME_TIME = 600
+const GAME_TIME = 2
 
 export type ContextValues = {
   deck: CardType[];
@@ -226,7 +228,6 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
   
 
     //functions
-
     initializeGame,
     unselectCard,
     selectCard,

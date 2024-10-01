@@ -2,7 +2,9 @@
 export default {
   content: ["./components/**/*.{js,ts,tsx,jsx}", "./app/**/*.{js,ts,tsx,jsx}"],
   theme: {},
-  plugins: [],
+  plugins: [
+    require("@designbycode/tailwindcss-text-stroke"),
+  ],
   safelist: [
     "ring-1",
     "ring-offset-cyan-700",
