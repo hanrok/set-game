@@ -5,7 +5,7 @@ import { setCardsOnTable, shuffleDeck, countSets } from "@/utils/index";
 import cardsList from "cards.json";
 import { CardType } from "@/models/card";
 
-const GAME_TIME = 2
+const GAME_TIME = 60
 
 export type ContextValues = {
   deck: CardType[];
