@@ -25,10 +25,12 @@ export default function MainPage() {
     };
 
     return (
-        <div className="m-5 flex-grow flex flex-col justify-between text-white ">
+        <div className="m-5 flex-grow flex flex-col justify-between text-white">
             <h1 className="font-bold text-4xl text-center mt-20 block drop-shadow-xl shadow-black text-stroke-gray-200 text-stroke">
                 Welcome To<br />
-                <img className="my-10" src={"/assets/svg/logo.svg"} alt="Data SET Logo" />
+                <div className="flex justify-center">
+                    <img className="my-10" src={"/assets/svg/logo.svg"} alt="Data SET Logo" />
+                </div>
                 Data SET!
             </h1>
             <div className="flex flex-col space-y-10 p-10 mb-10">
