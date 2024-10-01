@@ -86,20 +86,22 @@ const GameBoard = () => {
               <div className="text-white mb-10">You found <span className="font-bold text-3xl mx-2">{sets.length}</span> sets!</div>
               <div className="flex flex-col p-10 space-y-2">
                 <div className="flex flex-grow">
-                  <button className="flex items-center justify-center bg-yellow-500 py-5 rounded-md text-white font-bold flex-grow" onClick={() => {console.log("clicked"); resetGame();}}>
+                  <button className="flex items-center justify-center bg-pink-1200 py-5 rounded-md text-white font-bold flex-grow" onClick={() => {console.log("clicked"); resetGame();}}>
                     <FaPlayCircle className="mr-2" size={24} /> PLAY AGAIN!
                   </button>
                 </div>
-                <div className="flex justify-between space-x-2">
-                  <Link href="/scores">
-                    <button className="flex items-center justify-center bg-green-500 py-5 px-5 rounded-md text-white font-bold flex-grow">
+                <div className="flex justify-between space-x-2 items-start">
+                  <Link href="/scores" className="flex-grow flex">
+                    <button className="flex items-center justify-center bg-gray-1300 py-5 px-5 rounded-md text-gray-900 font-bold flex-grow">
                       <FaTable className="mr-2" size={24} /> SCORE TABLE
                     </button>
                   </Link>
                   {/* if user not logged in */}
-                  <button className="flex items-center justify-center bg-blue-500 py-5 px-5 rounded-md text-white font-bold flex-grow">
-                    <FaUserCircle className="mr-2" size={24} /> Register
-                  </button>
+                  <Link href="/signin" className="flex-grow flex">
+                    <button className="flex flex-grow items-center justify-center bg-orange-1200 py-5 px-5 rounded-md text-white font-bold">
+                      <FaUserCircle className="mr-2" size={24} /> Register
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -121,7 +123,7 @@ const GameBoard = () => {
                   }
                 />
               )} */}
-              <div className="grid grid-cols-3 gap-x-2 gap-y-2 my-4 flex-grow">
+              <div className="grid grid-cols-3 gap-x-2 gap-y-2 flex-grow">
                 {cardsOnBoard.map((card, index) => (
                   <Card key={index} config={card} onClick={() => onSelectCard(card)} />
                 ))}

@@ -32,10 +32,10 @@ export default function MainPage() {
                 Data SET!
             </h1>
             <div className="flex flex-col space-y-10 p-10 mb-10">
-                <button className="flex items-center justify-center bg-yellow-500 py-5 rounded-md text-white font-bold" onClick={() => router.push("/game")}>
+                <button className="flex items-center justify-center bg-pink-1200 py-5 rounded-md text-white font-bold" onClick={() => router.push("/game")}>
                     <FaPlayCircle className="mr-2" size={24} /> PLAY NOW!
                 </button>
-                <button className="flex items-center justify-center bg-blue-500 py-5 rounded-md text-white font-bold" onClick={handleOpenModal}>
+                <button className="text-gray-200 flex items-center justify-center bg-orange-1200 py-5 rounded-md font-bold" onClick={handleOpenModal}>
                     <ImBook className="mr-2" size={24} /> RULES
                 </button>
             </div>
@@ -43,7 +43,7 @@ export default function MainPage() {
             {/* Modal */}
             {isModalOpen && (
                 <div className="fixed inset-0 modal-overlay bg-black bg-opacity-50 flex items-center justify-center" onClick={handleOutsideClick}>
-                    <div className="bg-gray-800 p-6 rounded-md shadow-lg max-w-md h-3/5 w-4/5 overflow-y-auto space-y-2">
+                    <div className="bg-purple-1200 p-6 rounded-md shadow-lg max-w-md h-3/5 w-4/5 overflow-y-auto space-y-2">
                         <h2 className="text-2xl font-bold mb-4">Game Rules</h2>
                         {/* TL;DR Section */}
                         <h3 className="text-lg font-semibold mb-2">TL;DR:</h3>
@@ -59,7 +59,7 @@ export default function MainPage() {
                         <p><strong>Hints:</strong> If you're struggling to find sets, you can request a hint. The game will highlight one valid set from the displayed cards. Use hints wisely, as they may be limited.</p>
                         <p><strong>Categories and Attributes:</strong> Familiarize yourself with the various categories of the data product cards to improve your chances of finding sets.</p>
                         <div>
-                            <button className="mt-4 bg-red-500 text-white py-2 px-4 rounded-md" onClick={handleCloseModal}>Close</button>
+                            <button className="mt-4 bg-gray-1300 text-gray-950 py-2 px-4 rounded-md" onClick={handleCloseModal}>Close</button>
                         </div>
                     </div>
                 </div>

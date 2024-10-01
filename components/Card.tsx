@@ -22,20 +22,22 @@ const createImages = (config: number[]) => {
 };
 
 const Card = ({ config, onClick }: ICardProps) => {
-  const className = cn("text-gray-900 py-2 px-2 rounded flex justify-center items-center", {
-    "bg-gray-200": !config.selected,
-    "ring-1": config.selected,
-    "ring-offset-cyan-700": config.selected,
-    "ring-offset-2": config.selected,
-    "bg-cyan-800": config.selected,
+  const className = cn("flex flex-col text-gray-900 bg-gray-1200 rounded flex justify-center items-center", {
+    "bg-gray-1200": !config.selected,
+    // "ring-1": config.selected,
+    // "ring-offset-cyan-700": config.selected,
+    // "ring-offset-2": config.selected,
+    "bg-pink-1200": config.selected,
     "text-white": config.selected,
   });
 
   return (
     <button onClick={onClick} className={className}>
-      <div className="flex flex-col items-center">
-        <img src={config.logo} width="30" />
-        <div className="text-sm mt-2 font-medium">
+      <div className="flex flex-col flex-grow justify-between items-center px-4 py-2">
+        <div className="flex-grow flex flex-col justify-center">
+          <img src={config.logo} width={80}/>
+        </div>
+        <div className="text-sm pt-2 font-medium">
           {/* {config.name} */}
           {config.category}
         </div>
