@@ -36,7 +36,7 @@ const Card = ({ config, onClick }: ICardProps) => {
       <button onClick={onClick} className={"flex flex-col flex-grow justify-center items-center text-gray-900 rounded"}>
         <div className="flex flex-col flex-grow justify-between items-center px-4 py-2">
           <div className="flex-grow flex flex-col justify-center">
-            <img src={config.logo} className="block min-h-20" />
+            <img src={config.logo} width={50} />
           </div>
           <div className="text-sm pt-2 font-medium">
             {config.category}
