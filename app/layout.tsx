@@ -1,5 +1,7 @@
 import "tailwindcss/tailwind.css";
 import { Metadata } from "next";
+import SetGameContext from "@/components/Context";
+import { AuthProvider } from "@/components/AuthContext";
 
 export const metadata: Metadata = {
   title: "ElementaryDataSet Game",
@@ -11,7 +13,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html className="font-display bg-purple-1200 leading-normal antialiased" lang="en">
       <body className="flex h-dvh w-full justify-center">
         <main className="flex flex-grow flex-col align-middle">
-          {children}
+          <AuthProvider>
+            <SetGameContext>
+                {children}
+            </SetGameContext>
+          </AuthProvider>
         </main>
       </body>
     </html>

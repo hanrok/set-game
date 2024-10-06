@@ -14,8 +14,10 @@ import Modal from "./Modal";
 import Header from "./partials/Header";
 import { CardType } from "@/models/card";
 import Link from "next/link";
+import { useAuth } from "./AuthContext";
 
 const GameBoard = () => {
+  const {user} = useAuth();
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState<{ type: string; message: string } | null>(null);
   const [timeoutId, setTimeoutId] = useState<any>(null);
@@ -97,11 +99,11 @@ const GameBoard = () => {
                     </button>
                   </Link>
                   {/* if user not logged in */}
-                  <Link href="/signin" className="flex-grow flex">
+                  {(!user) && <Link href="/signin" className="flex-grow flex">
                     <button className="flex flex-grow items-center justify-center bg-orange-1200 py-5 px-5 rounded-md text-white font-bold">
                       <FaUserCircle className="mr-2" size={24} /> Register
                     </button>
-                  </Link>
+                  </Link>}
                 </div>
               </div>
             </div>

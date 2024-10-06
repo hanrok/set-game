@@ -2,216 +2,206 @@
     {
         "name": "Snowflake",
         "category": "DWH",
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Snowflake_Logo.svg"
+        "logo": "logos/Snowflake.svg"
     },
     {
         "name": "Databricks",
         "category": "DWH",
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/6/63/Databricks_Logo.png"
+        "logo": "logos/Databricks.png"
     },
     {
         "name": "Redshift",
         "category": "DWH",
-        "logo": "https://cdn.worldvectorlogo.com/logos/aws-redshift-logo.svg"
+        "logo": "logos/Redshift.svg"
     },
     {
         "name": "Bigquery",
         "category": "DWH",
-        "logo": "https://www.vectorlogo.zone/logos/google_bigquery/google_bigquery-icon.svg"
+        "logo": "logos/Bigquery.svg"
     },
     {
         "name": "Tableau",
         "category": "BI",
-        "logo": "https://www.svgrepo.com/show/354428/tableau-icon.svg"
+        "logo": "logos/Tableau.svg"
     },
     {
         "name": "Looker",
         "category": "BI",
-        "logo": "https://www.svgrepo.com/show/354012/looker-icon.svg"
+        "logo": "logos/Looker.svg"
     },
     {
         "name": "Power BI",
         "category": "BI",
-        "logo": "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/power-bi-icon.svg"
+        "logo": "logos/Power BI.svg"
     },
     {
         "name": "Sigma",
         "category": "BI",
-        "logo": "https://cdn.prod.website-files.com/666bbba4ff7240a20f4ccccf/666bbba4ff7240a20f4ccd33_logo-sigma-black.svg"
+        "logo": "logos/Sigma.svg"
     },
     {
         "name": "Thougthspot",
         "category": "BI",
-        "logo": "https://www.thoughtspot.com/images/logo-black-with-r.svg"
+        "logo": "logos/Thougthspot.svg"
     },
     {
         "name": "Lightdash",
         "category": "Open source BI",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/Lightdash.svg"
     },
     {
         "name": "Metabase",
         "category": "Open source BI",
-        "logo": "https://www.vectorlogo.zone/logos/metabase/metabase-icon.svg"
+        "logo": "logos/Metabase.svg"
     },
     {
         "name": "Preset",
         "category": "Open source BI",
-        "logo": "https://avatars.githubusercontent.com/u/45908173?s=280&v=4"
+        "logo": "logos/Preset.png"
     },
     {
         "name": "Alation",
         "category": "Catalog",
-        "logo": "https://www.alation.com/_next/image/?url=https%3A%2F%2Fimages.ctfassets.net%2F7p3vnbbznfiw%2F4bYcA2ZQMWxCwL5hKXxvZl%2Ff3772db87ede0d90dd1633d38473139e%2FAlation-Favicon-Orange-510x510.png&w=640&q=75"
+        "logo": "logos/Alation.png"
     },
     {
         "name": "Collibra",
         "category": "Catalog",
-        "logo": "https://www.collibra.com/mfe/nav/assets/icons/logo.svg"
+        "logo": "logos/Collibra.svg"
     },
     {
         "name": "data.world",
         "category": "Catalog",
-        "logo": "https://cdn.brandfetch.io/idFD6X6RbB/w/400/h/400/theme/dark/icon.jpeg?k=id64Mup7ac&t=1720754757770"
+        "logo": "logos/data.world.jpg"
     },
     {
         "name": "Atlan",
         "category": "Catalog",
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Atlan-logo-full.svg/512px-Atlan-logo-full.svg.png?20210322110300"
+        "logo": "logos/Atlan.png"
     },
     {
         "name": "select.star",
         "category": "Catalog",
-        "logo": "https://cdn.prod.website-files.com/61781d672fbf5e174e487703/662db7ccadb5dcfda26c5cf4_Select%20Star%20Logo%20-%20Vertical%20-%20Magenta%20%26%20Dark.svg"
+        "logo": "logos/select.star.svg"
     },
     {
         "name": "Fivetran",
         "category": "ETL",
-        "logo": "https://www.vectorlogo.zone/logos/fivetran/fivetran-icon.svg"
+        "logo": "logos/Fivetran.svg"
     },
     {
         "name": "Airbyte",
         "category": "ETL",
-        "logo": "https://getlogo.net/wp-content/uploads/2023/06/airbyte-inc-logo-vector.png"
+        "logo": "logos/Airbyte.png"
     },
     {
         "name": "Stitch",
         "category": "ETL",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/Stitch.svg"
     },
     {
         "name": "Talend",
         "category": "ETL",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/Talend.png"
     },
     {
         "name": "MySQL",
         "category": "Transactional DB",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/MySQL.svg"
     },
     {
         "name": "Postgres",
         "category": "Transactional DB",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/Postgres.svg"
     },
     {
         "name": "MS SQL",
         "category": "Transactional DB",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/MS SQL.png"
     },
     {
         "name": "Trino",
         "category": "Data Lake engine",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/Trino.png"
     },
     {
         "name": "Starburst",
         "category": "Data Lake engine",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/Starburst.svg"
     },
     {
         "name": "Dremio",
         "category": "Data Lake engine",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/Dremio.png"
     },
     {
         "name": "Airflow",
         "category": "Orchestrator",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/Airflow.png"
     },
     {
         "name": "Prefect",
         "category": "Orchestrator",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/Prefect.svg"
     },
     {
         "name": "Dagster",
         "category": "Orchestrator",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/Dagster.svg"
     },
     {
         "name": "GCS",
         "category": "Cloud storage",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/GCS.svg"
     },
     {
         "name": "S3",
         "category": "Cloud storage",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/S3.svg"
     },
     {
         "name": "Azure Blob",
         "category": "Cloud storage",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/Azure Blob.svg"
     },
     {
         "name": "Elementary",
         "category": "Data observability",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/Elementary.svg"
     },
     {
         "name": "Monte Carlo",
         "category": "Data observability",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/Monte Carlo.svg"
     },
     {
         "name": "Metaplane",
         "category": "Data observability",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/Metaplane.svg"
     },
     {
         "name": "BigEye",
         "category": "Data observability",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/BigEye.svg"
     },
     {
         "name": "Github",
         "category": "Code repos",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/Github.svg"
     },
     {
         "name": "Gitlab",
         "category": "Code repos",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/Gitlab.svg"
     },
     {
         "name": "Bitbucket",
         "category": "Code repos",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/Bitbucket.svg"
     },
     {
         "name": "dbt",
         "category": "Data transformation",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
-    },
-    {
-        "name": "dbt",
-        "category": "Data transformation",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
-    },
-    {
-        "name": "dbt",
-        "category": "Data transformation",
-        "logo": "https://cdn.worldvectorlogo.com/logos/svg-2.svg"
+        "logo": "logos/dbt.svg"
     }
 ]

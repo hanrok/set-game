@@ -1,53 +1,53 @@
 'use client'
 
-import { app } from "@/firebase";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-
 import { FcGoogle } from "react-icons/fc"; // Google logo
 import { FaGithub } from "react-icons/fa"; // GitHub logo
 import { MdEmail } from "react-icons/md"; // Email logo
 import Link from "next/link";
+import { useAuth } from "@/components/AuthContext";
 
-const AuthComponent = () => {
-  const auth = getAuth(app);
-  const router = useRouter(); // Initialize the router for navigation
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [isSignUp, setIsSignUp] = useState(false); // Toggle between sign-in and sign-up
-  const [step, setStep] = useState(1); // To manage signup steps
+const AuthComponent = (): JSX.Element => {
+  const { user, signInWithGoogle, signInWithGithub, signInWithEmail, signUpWithEmail } = useAuth();
+  console.log("user", user);
+  const router = useRouter();
 
-  const googleProvider = new GoogleAuthProvider();
-  const githubProvider = new GithubAuthProvider();
+  if (user) {
+    router.push("/scores")
+  }
+
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [isSignUp, setIsSignUp] = useState<boolean>(false); // Toggle between sign-in and sign-up
+  const [step, setStep] = useState<number>(1); // To manage signup steps
 
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithPopup(auth, googleProvider);
+      await signInWithGoogle();
       router.push("/"); // Navigate to root after sign-in
-    } catch (error) {
-      setError(error.message);
+    } catch (error: any) {
+      setError(error.message); // Display error message to the user
     }
   };
 
   const handleGithubSignIn = async () => {
     try {
-      await signInWithPopup(auth, githubProvider);
+      await signInWithGithub();
       router.push("/"); // Navigate to root after sign-in
-    } catch (error) {
-      setError(error.message);
+    } catch (error: any) {
+      setError(error.message); // Display error message to the user
     }
   };
 
   const handleEmailSignIn = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmail(email, password);
       router.push("/"); // Navigate to root after sign-in
-    } catch (error) {
-      setError(error.message);
+    } catch (error: any) {
+      setError(error.message); // Display error message to the user
     }
   };
 
@@ -63,30 +63,31 @@ const AuthComponent = () => {
 
   const handleSignUpStep2 = async () => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      await signUpWithEmail(email, password);
       router.push("/"); // Navigate to root after sign-up
-    } catch (error) {
-      setError(error.message);
+    } catch (error: any) {
+      setError(error.message); // Display error message to the user
     }
   };
 
   return (
     <div className="flex flex-col items-stretch justify-center bg-purple-1200 flex-grow">
-          <Link href="/">
-      <div className="w-3/4 flex text-white mt-4 pl-5">
-        <div className="w-3/4">
-            <img src="/assets/svg/logo.svg" />
+      <Link href="/">
+        <div className="w-4/5 flex text-white mt-4 pl-5">
+          <div className="w-3/4">
+              <img src="/assets/svg/logo.svg" />
+          </div>
+          <div className="flex-grow w-1/4 flex flex-col justify-end">
+            <div className="font-bold text-gray-100">SET GAME</div>
+          </div>
         </div>
-        <div className="flex-grow w-1/4 flex flex-col justify-end">
-          <div className="font-bold text-gray-100">SET GAME</div>
-        </div>
-      </div>
-          </Link>
+      </Link>
       
-      <div className="flex flex-col justify-center items-center flex-grow">
+      <div className="flex flex-col justify-center items-center flex-grow mx-6">
         <h1 className="text-white text-3xl font-bold mb-6 text-center">{isSignUp ? "Sign Up" : "Sign In"}</h1>
 
         {error && <p className="text-red-500 mb-4">{error}</p>}
+        
         {/* Email/Password Form */}
         <div className="w-full max-w-sm flex flex-col items-center mb-4">
           {!isSignUp && (
