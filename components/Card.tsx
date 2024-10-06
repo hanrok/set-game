@@ -39,7 +39,7 @@ const Card = ({ config, onClick }: ICardProps) => {
             <img src={config.logo} className="block min-h-20" />
           </div>
           <div className="text-sm pt-2 font-medium">
-            {config.name}
+            {config.category}
           </div>
         </div>
         

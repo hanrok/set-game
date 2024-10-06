@@ -1,21 +1,24 @@
 'use client'
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc"; // Google logo
 import { FaGithub } from "react-icons/fa"; // GitHub logo
 import { MdEmail } from "react-icons/md"; // Email logo
 import Link from "next/link";
 import { useAuth } from "@/components/AuthContext";
+import { Context, ContextValues } from "@/components/Context";
+import { saveScore } from "@/utils/scores";
 
 
 const AuthComponent = (): JSX.Element => {
   const { user, signInWithGoogle, signInWithGithub, signInWithEmail, signUpWithEmail } = useAuth();
-  console.log("user", user);
+  const { sets, gameOver } = useContext(Context) as ContextValues;
+  
   const router = useRouter();
 
   if (user) {
-    router.push("/scores")
+    router.push("/scores");
   }
 
   const [email, setEmail] = useState<string>("");
@@ -24,10 +27,17 @@ const AuthComponent = (): JSX.Element => {
   const [isSignUp, setIsSignUp] = useState<boolean>(false); // Toggle between sign-in and sign-up
   const [step, setStep] = useState<number>(1); // To manage signup steps
 
+  const onSignIn = () => {
+    router.push("/"); // Navigate to root after sign-in
+    if (gameOver && sets.length > 0) {
+      saveScore(sets.length);
+    }
+  }
+
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle();
-      router.push("/"); // Navigate to root after sign-in
+      onSignIn();
     } catch (error: any) {
       setError(error.message); // Display error message to the user
     }
@@ -36,7 +46,7 @@ const AuthComponent = (): JSX.Element => {
   const handleGithubSignIn = async () => {
     try {
       await signInWithGithub();
-      router.push("/"); // Navigate to root after sign-in
+      onSignIn();
     } catch (error: any) {
       setError(error.message); // Display error message to the user
     }
@@ -45,7 +55,7 @@ const AuthComponent = (): JSX.Element => {
   const handleEmailSignIn = async () => {
     try {
       await signInWithEmail(email, password);
-      router.push("/"); // Navigate to root after sign-in
+      onSignIn();
     } catch (error: any) {
       setError(error.message); // Display error message to the user
     }
@@ -64,7 +74,7 @@ const AuthComponent = (): JSX.Element => {
   const handleSignUpStep2 = async () => {
     try {
       await signUpWithEmail(email, password);
-      router.push("/"); // Navigate to root after sign-up
+      onSignIn();
     } catch (error: any) {
       setError(error.message); // Display error message to the user
     }

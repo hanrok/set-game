@@ -4,8 +4,10 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import { setCardsOnTable, shuffleDeck, countSets } from "@/utils/index";
 import cardsList from "cards.json";
 import { CardType } from "@/models/card";
+import { saveScore } from "@/utils/scores";
+import { useAuth } from "./AuthContext";
 
-const GAME_TIME = 600
+const GAME_TIME = 60
 
 export type ContextValues = {
   deck: CardType[];
@@ -49,8 +51,10 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
   const [previousTime, setPreviousTime] = useState(0);
   const [timeLeft, setTimeLeft] = useState(GAME_TIME * 1000)
 
+  const {user} = useAuth();
+
   useEffect(() => {
-    if (timeLeft <= 0 || previousTime == 0) {
+    if (timeLeft < 0 || previousTime == 0) {
       return;
     }
 
@@ -67,11 +71,15 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
   }, [previousTime]);
 
   useEffect(() => {
+    if (timeLeft < 0) {
+      return;
+    }
+
     setTimeLeft(GAME_TIME * 1000 - elapsedTime);
   }, [elapsedTime]);
 
   useEffect(() => {
-    if (timeLeft <= 0) {
+    if (timeLeft < 0) {
       endGame();
     }
   }, [timeLeft]);
@@ -85,7 +93,6 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
   }, [cardsOnBoard, isRunning]);
 
   const initializeGame = () => {
-    console.log("initializeGame", cardsList.length);
     const cards = [...cardsList] as CardType[]
     
     // shuffeling deck is making the first cards to be the deck
@@ -205,10 +212,12 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
 
   const endGame = () => {
     setGameOver(true);
+    if (user) {
+      saveScore(sets.length);
+    }
   }
   
   const resetGame = () => {
-    console.log("resetting game");
     setGameOver(false);
     startGame(true);
     initializeGame();
