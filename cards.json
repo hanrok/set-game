@@ -72,7 +72,7 @@
     {
         "name": "data.world",
         "category": "Catalog",
-        "logo": "logos/data.world.jpg"
+        "logo": "logos/data.world.jpeg"
     },
     {
         "name": "Atlan",
@@ -117,7 +117,7 @@
     {
         "name": "MS SQL",
         "category": "Transactional DB",
-        "logo": "logos/MS SQL.png"
+        "logo": "logos/MS SQL.svg"
     },
     {
         "name": "Trino",

@@ -112,20 +112,8 @@ const GameBoard = () => {
       :
         <>
           <section className="flex flex-col px-4 flex-grow justify-center">
-            <div className="flex flex-col px-6 md:px-8 lg:px-4 xl:px-0 flex-grow justify-center">
-              {/* TODO: understand if relevant */}
-              {/* {showNotification ? (
-                <Alert type={notificationMessage?.type} message={notificationMessage?.message} />
-              ) : (
-                <Alert
-                  message={
-                    <>
-                      <span className="font-semibold px-2 py-1 rounded bg-gray-700 text-gray-300 mr-1">✨ Regla mágica:</span> Si dos cartas son... y una no es, entonces no es un <span className="font-semibold">SET</span>
-                    </>
-                  }
-                />
-              )} */}
-              <div className="grid grid-cols-3 gap-x-2 gap-y-2 flex-grow">
+            <div className="flex flex-col px-6 flex-grow justify-center">
+              <div className="flex-grow grid grid-cols-3 grid-rows-4 gap-x-4 gap-y-4">
                 {cardsOnBoard.map((card, index) => (
                   <Card key={index} config={card} onClick={() => onSelectCard(card)} />
                 ))}

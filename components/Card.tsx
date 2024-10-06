@@ -23,25 +23,23 @@ const createImages = (config: number[]) => {
 };
 
 const Card = ({ config, onClick }: ICardProps) => {
-  const className = cn("flex flex-col flex-grow text-gray-900 bg-gray-1200 rounded justify-center items-center", {
+  const containerClassName = cn("flex flex-col justify-center rounded", {
+    // "p-5": config.selected,
+    "border-4": config.selected,
     "bg-gray-1200": !config.selected,
-    // "ring-1": config.selected,
-    // "ring-offset-cyan-700": config.selected,
-    // "ring-offset-2": config.selected,
-    "bg-pink-1200": config.selected,
-    "text-white": config.selected,
+    "bg-gray-1300": config.selected,
+    // "col-span-1": !config.selected,
   });
 
   return (
-    <Bounce className="col-span-1 flex">
-      <button onClick={onClick} className={className}>
+    <Bounce className={containerClassName} key={config.name}>
+      <button onClick={onClick} className={"flex flex-col flex-grow justify-center items-center text-gray-900 rounded"}>
         <div className="flex flex-col flex-grow justify-between items-center px-4 py-2">
           <div className="flex-grow flex flex-col justify-center">
-            <img src={config.logo} width={80}/>
+            <img src={config.logo} className="block min-h-20" />
           </div>
           <div className="text-sm pt-2 font-medium">
-            {/* {config.name} */}
-            {config.category}
+            {config.name}
           </div>
         </div>
         
