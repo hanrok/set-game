@@ -2,6 +2,7 @@
 
 import cn from "clsx";
 import React from "react";
+import { Bounce } from "react-awesome-reveal";
 import { CardType as CardType } from "@/models/card";
 
 interface ICardProps {
@@ -22,7 +23,7 @@ const createImages = (config: number[]) => {
 };
 
 const Card = ({ config, onClick }: ICardProps) => {
-  const className = cn("flex flex-col text-gray-900 bg-gray-1200 rounded flex justify-center items-center", {
+  const className = cn("flex flex-col flex-grow text-gray-900 bg-gray-1200 rounded justify-center items-center", {
     "bg-gray-1200": !config.selected,
     // "ring-1": config.selected,
     // "ring-offset-cyan-700": config.selected,
@@ -32,19 +33,21 @@ const Card = ({ config, onClick }: ICardProps) => {
   });
 
   return (
-    <button onClick={onClick} className={className}>
-      <div className="flex flex-col flex-grow justify-between items-center px-4 py-2">
-        <div className="flex-grow flex flex-col justify-center">
-          <img src={config.logo} width={80}/>
+    <Bounce className="col-span-1 flex">
+      <button onClick={onClick} className={className}>
+        <div className="flex flex-col flex-grow justify-between items-center px-4 py-2">
+          <div className="flex-grow flex flex-col justify-center">
+            <img src={config.logo} width={80}/>
+          </div>
+          <div className="text-sm pt-2 font-medium">
+            {/* {config.name} */}
+            {config.category}
+          </div>
         </div>
-        <div className="text-sm pt-2 font-medium">
-          {/* {config.name} */}
-          {config.category}
-        </div>
-      </div>
-      
-      {/* {createImages(config)} */}
-    </button>
+        
+        {/* {createImages(config)} */}
+      </button>
+    </Bounce>
   );
 };
 
