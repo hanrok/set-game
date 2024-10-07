@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useAuth } from "@/components/AuthContext";
 import { Bounce, Fade, Zoom } from "react-awesome-reveal";
 import useSound from "use-sound";
+import PWAInstallPrompt from "@/components/PWAInstallPrompt"; // Import the PWAInstallPrompt
 
 export default function MainPage() {
     const { user } = useAuth();
@@ -35,10 +36,12 @@ export default function MainPage() {
         playTapSound();
         router.push('/signin');
     };
-    
 
     return (
         <div className="m-5 flex-grow flex flex-col justify-between text-white">
+            {/* Add PWAInstallPrompt component */}
+            <PWAInstallPrompt />
+
             <h1 className="font-bold text-4xl text-center mt-20 block drop-shadow-xl shadow-black text-stroke-gray-200 text-stroke">
                 <Zoom cascade={true} damping={0.3}>
                     <div>
