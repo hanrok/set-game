@@ -24,17 +24,10 @@ const GameBoard = () => {
 
   const { deck, nsets, sets, addThreeCards, selectedSet, cardsOnBoard, unselectCard, selectCard, registerSet, clearSelectedSet, replaceCards, endGame, gameOver, resetGame } = useContext(Context) as ContextValues;
 
-  useEffect(() => {
-    if (nsets?.length === 0) {
-      console.log("no mas set");
-    }
-  }, [nsets]);
-
   const onSelectCard = (tapCard: CardType) => {
     if (tapCard.selected) {
       unselectCard(tapCard);
     } else if (selectedSet.length < 3) {
-      console.log("selectedSet", selectedSet);
       const possibleSet = selectCard(tapCard);
       if (possibleSet.length === 3) {
         // If three cards were chosen, we proceed to evaluate the cards
@@ -45,7 +38,6 @@ const GameBoard = () => {
         const timer = setTimeout(() => setShowNotification(false), 4000); // Dismiss notification after 4 seconds
         setTimeoutId(timer);
 
-        console.log("validatePossibleSet(possibleSet)", validatePossibleSet(possibleSet));
         if (validatePossibleSet(possibleSet)) {
           setNotificationMessage({ type: "success", message: "Enhorabuena! Haz encontrado un SET" });
           registerSet(possibleSet); // Register set finded by user
@@ -54,7 +46,6 @@ const GameBoard = () => {
           // check if there is no sets in the deck with the cards on board
           const allCards = [...deck, ...cardsOnBoard];
           let {size} = countSets(allCards)
-          console.log("left possible sets", allCards, size);
           if (size > 0) {
             // replace cards
             replaceCards(possibleSet);
@@ -71,11 +62,6 @@ const GameBoard = () => {
   };
 
   const handleEventModal = () => addThreeCards();
-
-  // console.log("deck", deck);
-  // console.log("nsets", nsets);
-  // console.log("selectedSet", selectedSet);
-  // console.log("cardsOnBoard", cardsOnBoard);
 
   return (
     <div className="flex flex-col flex-grow">
@@ -112,16 +98,15 @@ const GameBoard = () => {
       :
         <>
           <section className="flex flex-col px-4 flex-grow justify-center">
-            <div className="flex flex-col px-6 flex-grow justify-center">
-              <div className="flex-grow grid grid-cols-3 grid-rows-4 gap-x-4 gap-y-4">
+            <div className="flex flex-col px-6 justify-center flex-grow">
+              <div className="grid grid-cols-3 grid-rows-4 gap-x-4 gap-y-4" style={{height: "70vh"}}>
                 {cardsOnBoard.map((card, index) => (
                   <Card key={index} config={card} onClick={() => onSelectCard(card)} />
                 ))}
               </div>
               <div className="py-2 flex items-center justify-between text-gray-400">
                 <div className="flex items-center">
-                  Deck
-                  <span className="inline-block font-semibold ml-2 text-lg text-white">{deck.length}</span>
+                  
                 </div>
                 <div className="flex items-center">
                   Set Posibles:

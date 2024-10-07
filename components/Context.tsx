@@ -152,36 +152,27 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
     const currentCardsOnBoard = [...cardsOnBoard];
     let currentDeck = [...deck];
 
-    if (currentCardsOnBoard.length > 12) {
-      // still don't know how it could happen but ok..
-      cards.forEach((card) => {
-        currentCardsOnBoard.splice(currentCardsOnBoard.indexOf(card), 1);
+    // todo: if the JSON includes only cards that divide by 3 so it will be ok to check only if the deck is empty
+    if (currentDeck.length > cards.length) {
+      let newBoardSetCount = 0
+      const leftCardsOnBoard = currentCardsOnBoard.filter((c, idx) => !cardsIndexes.includes(idx));
+      do {
+        // shuffelling till we have at least one set on board
+        currentDeck = shuffleDeck(currentDeck);
+        const newCards = currentDeck.slice(0, 3);
+        const {size} = countSets([...leftCardsOnBoard, ...newCards]);
+        newBoardSetCount = size
+      } while (newBoardSetCount <= 0);
+
+      const cardsOut = [];
+      cardsIndexes.forEach((cardIdx) => {
+        const card = currentDeck.shift() as CardType;
+        currentCardsOnBoard.splice(cardIdx, 1, card);
+        cardsOut.push(card);
       });
-    } else {
-      // todo: if the JSON includes only cards that divide by 3 so it will be ok to check only if the deck is empty
-      if (currentDeck.length > cards.length) {
-        let newBoardSetCount = 0
-        do {
-          // checking if there are sets if we take 3 cards head of the deck
-          currentDeck = shuffleDeck(currentDeck);
-          const newCards = currentDeck.slice(0, 3);
-          const leftCardsOnBoard = currentCardsOnBoard.filter((c, idx) => !cardsIndexes.includes(idx));
 
-          // count the sets on the board
-          const {size} = countSets([...leftCardsOnBoard, ...newCards]);
-          newBoardSetCount = size
-        } while (newBoardSetCount <= 0)
-
-        cardsIndexes.forEach((cardIdx) => {
-          const card = currentDeck.shift() as CardType;
-          currentCardsOnBoard.splice(cardIdx, 1, card);
-        });
-      } 
-      /*else {
-        cards.forEach((cardIndex) => {
-          currentCardsOnBoard.splice(cardIndex, 1);
-        });
-      }*/
+      // add to the deck the cards that found by the player
+      currentDeck.push(...cardsOut);
     }
 
     setCardsOnBoard(currentCardsOnBoard);
@@ -201,7 +192,7 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
     
     for (let i = 0; i < 3; i++) {
       const card = currentDeck.pop() as CardType;
-      currentCardsOnBoard.push(card)
+      currentCardsOnBoard.push(card);
     }
 
     setCardsOnBoard(currentCardsOnBoard);
