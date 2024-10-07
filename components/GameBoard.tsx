@@ -14,6 +14,7 @@ import Header from "./partials/Header";
 import { CardType } from "@/models/card";
 import Link from "next/link";
 import { useAuth } from "./AuthContext";
+import useSound from "use-sound";
 
 const GameBoard = () => {
   const {user} = useAuth();
@@ -35,6 +36,7 @@ const GameBoard = () => {
     firstTime,
     initializeGame,
   } = useContext(Context) as ContextValues;
+  const [playRightSound] = useSound('assets/sounds/right.wav');
 
   const onSelectCard = (tapCard: CardType) => {
     if (tapCard.selected) {
@@ -45,6 +47,7 @@ const GameBoard = () => {
         // If three cards were chosen, we proceed to evaluate the cards
         
         if (validatePossibleSet(possibleSet)) {
+          playRightSound();
           registerSet(possibleSet); // Register set finded by user
           clearSelectedSet(); // Clear possible set selected by user
           

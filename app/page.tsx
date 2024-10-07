@@ -7,13 +7,16 @@ import { FaPlayCircle, FaUserCircle } from "react-icons/fa";
 import Link from "next/link";
 import { useAuth } from "@/components/AuthContext";
 import { Bounce, Fade, Zoom } from "react-awesome-reveal";
+import useSound from "use-sound";
 
 export default function MainPage() {
     const { user } = useAuth();
     const router = useRouter();
     const [isModalOpen, setModalOpen] = useState(false);
+    const [playTapSound] = useSound('assets/sounds/tap.wav');
 
     const handleOpenModal = () => {
+        playTapSound();
         setModalOpen(true);
     };
 
@@ -27,6 +30,12 @@ export default function MainPage() {
             handleCloseModal();
         }
     };
+
+    const handleRegister = () => {
+        playTapSound();
+        router.push('/signin');
+    };
+    
 
     return (
         <div className="m-5 flex-grow flex flex-col justify-between text-white">
@@ -44,7 +53,7 @@ export default function MainPage() {
             <div className="flex flex-col space-y-5 p-10 mb-10">
                 <Bounce cascade delay={700} damping={0.4}>
                     <div className="flex justify-stretch">
-                        <button className="flex items-center justify-center bg-pink-1200 py-5 rounded-md text-white font-bold w-full" onClick={() => router.push("/game")}>
+                        <button className="flex items-center justify-center bg-pink-1200 py-5 rounded-md text-white font-bold w-full" onClick={() => {playTapSound(); router.push("/game")}}>
                             <FaPlayCircle className="mr-2" size={24} /> PLAY NOW!
                         </button>
                     </div>
@@ -54,7 +63,7 @@ export default function MainPage() {
                         </button>
                         {!user && (
                             <Link href="/signin" className="flex-grow flex">
-                                <button className="flex-grow text-gray-900 flex items-center justify-center bg-gray-1200 py-5 rounded-md font-bold" onClick={handleOpenModal}>
+                                <button className="flex-grow text-gray-900 flex items-center justify-center bg-gray-1200 py-5 rounded-md font-bold" onClick={(handleRegister)}>
                                 <FaUserCircle className="mr-2" size={24} /> Register
                                 </button>
                             </Link>

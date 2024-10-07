@@ -4,6 +4,7 @@ import cn from "clsx";
 import React from "react";
 import { Bounce } from "react-awesome-reveal";
 import { CardType as CardType } from "@/models/card";
+import useSound from "use-sound";
 
 interface ICardProps {
   config: CardType;
@@ -29,16 +30,22 @@ const Card = ({ config, onClick }: ICardProps) => {
     "bg-gray-1200": !config.selected,
     "bg-gray-1300": config.selected,
   });
+  const [playTapSound] = useSound('assets/sounds/tap.wav');
+
+  const handleOnClick = (e) => {
+    playTapSound();
+    onClick(e);
+  }
 
   return (
     <Bounce className={containerClassName} key={config.name}>
-      <button onClick={onClick} className="flex flex-col flex-grow justify-center text-gray-900 rounded overflow-hidden items-stretch">
+      <button onClick={handleOnClick} className="flex flex-col flex-grow justify-center text-gray-900 rounded overflow-hidden items-stretch">
         <div className="flex flex-col flex-grow justify-between items-center px-4 py-2">
           <div className="flex-grow w-full h-full bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url('${config.logo}')` }}>
           </div>
           <div className="text-sm pt-2 font-medium">
-            {config.name}
-            {/* {config.category} */}
+            {/* {config.name} */}
+            {config.category}
           </div>
         </div>
       </button>
