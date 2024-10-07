@@ -85,14 +85,6 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
     }
   }, [timeLeft]);
 
-
-  useEffect(() => {
-    if (!isRunning) {
-      // startGame(true);
-      // initializeGame();
-    }
-  }, [isRunning]);
-
   const initializeGame = () => {
     const cards = [...cardsList] as CardType[]
     
@@ -171,7 +163,6 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
       cardsIndexes.forEach((cardIdx) => {
         const card = currentDeck.shift() as CardType;
         currentCardsOnBoard.splice(cardIdx, 1, card);
-        cardsOut.push(card);
       });
 
       // add to the deck the cards that found by the player
@@ -180,7 +171,6 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
 
     setCardsOnBoard(currentCardsOnBoard);
     setDeck(currentDeck);
-
     countPossibleSets(currentCardsOnBoard);
   }
 
