@@ -6,6 +6,7 @@ import { ImBook } from "react-icons/im";
 import { FaPlayCircle, FaUserCircle } from "react-icons/fa";
 import Link from "next/link";
 import { useAuth } from "@/components/AuthContext";
+import { Bounce, Fade, Zoom } from "react-awesome-reveal";
 
 export default function MainPage() {
     const { user } = useAuth();
@@ -30,29 +31,36 @@ export default function MainPage() {
     return (
         <div className="m-5 flex-grow flex flex-col justify-between text-white">
             <h1 className="font-bold text-4xl text-center mt-20 block drop-shadow-xl shadow-black text-stroke-gray-200 text-stroke">
-                Welcome To<br />
-                <div className="flex justify-center">
-                    <img className="my-10" src="/assets/svg/logo.svg" alt="Data SET Logo" />
-                </div>
-                Data SET!
+                <Zoom cascade={true} damping={0.3}>
+                    <div>
+                        Welcome To<br />
+                    </div>
+                    <div className="flex justify-center">
+                        <img className="my-10" src="/assets/svg/logo.svg" alt="Data SET Logo" />
+                    </div>
+                    <div>Data SET!</div>
+                </Zoom>
             </h1>
             <div className="flex flex-col space-y-5 p-10 mb-10">
-                <button className="flex items-center justify-center bg-pink-1200 py-5 rounded-md text-white font-bold" onClick={() => router.push("/game")}>
-                    <FaPlayCircle className="mr-2" size={24} /> PLAY NOW!
-                </button>
-                <div className="flex justify-between space-x-2">
-                    <button className="flex-grow text-gray-200 flex items-center justify-center bg-orange-1200 py-5 rounded-md font-bold" onClick={handleOpenModal}>
-                        <ImBook className="mr-2" size={24} /> RULES
-                    </button>
-                    {!user && (
-                        <Link href="/signin" className="flex-grow flex">
-                            <button className="flex-grow text-gray-900 flex items-center justify-center bg-gray-1200 py-5 rounded-md font-bold" onClick={handleOpenModal}>
-                            <FaUserCircle className="mr-2" size={24} /> Register
-                            </button>
-                        </Link>
-                    )}
-                </div>
-                
+                <Bounce cascade delay={700} damping={0.4}>
+                    <div className="flex justify-stretch">
+                        <button className="flex items-center justify-center bg-pink-1200 py-5 rounded-md text-white font-bold w-full" onClick={() => router.push("/game")}>
+                            <FaPlayCircle className="mr-2" size={24} /> PLAY NOW!
+                        </button>
+                    </div>
+                    <div className="flex justify-between space-x-2">
+                        <button className="flex-grow text-gray-200 flex items-center justify-center bg-orange-1200 py-5 rounded-md font-bold" onClick={handleOpenModal}>
+                            <ImBook className="mr-2" size={24} /> RULES
+                        </button>
+                        {!user && (
+                            <Link href="/signin" className="flex-grow flex">
+                                <button className="flex-grow text-gray-900 flex items-center justify-center bg-gray-1200 py-5 rounded-md font-bold" onClick={handleOpenModal}>
+                                <FaUserCircle className="mr-2" size={24} /> Register
+                                </button>
+                            </Link>
+                        )}
+                    </div>
+                </Bounce>
             </div>
 
             {/* Modal */}
