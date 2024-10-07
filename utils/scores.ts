@@ -14,7 +14,7 @@ export const saveScore = async (setsFound) => {
         timestamp: serverTimestamp(),
       });
 
-      console.trace("Score saved successfully!");
+      console.log("Score saved successfully!");
     } else {
       console.log("No user is signed in");
     }

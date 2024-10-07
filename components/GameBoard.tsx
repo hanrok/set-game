@@ -78,7 +78,7 @@ const GameBoard = () => {
                     <FaPlayCircle className="mr-2" size={24} /> PLAY AGAIN!
                   </button>
                 </div>
-                <div className="flex justify-between space-x-2 items-start">
+                <div className="flex justify-between space-x-2 items-stretch">
                   <Link href="/scores" className="flex-grow flex">
                     <button className="flex items-center justify-center bg-gray-1300 py-5 px-5 rounded-md text-gray-900 font-bold flex-grow">
                       <FaTable className="mr-2" size={24} /> SCORE TABLE
@@ -99,7 +99,7 @@ const GameBoard = () => {
         <>
           <section className="flex flex-col px-4 flex-grow justify-center">
             <div className="flex flex-col px-6 justify-center flex-grow">
-              <div className="grid grid-cols-3 grid-rows-4 gap-x-4 gap-y-4" style={{height: "70vh"}}>
+              <div className="grid grid-cols-3 grid-rows-4 gap-x-4 gap-y-4" style={{height: "65vh"}}>
                 {cardsOnBoard.map((card, index) => (
                   <Card key={index} config={card} onClick={() => onSelectCard(card)} />
                 ))}

@@ -164,7 +164,7 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
         newBoardSetCount = size
       } while (newBoardSetCount <= 0);
 
-      const cardsOut = [];
+      const cardsOut = cardsIndexes.map(idx => cardsOnBoard[idx]);
       cardsIndexes.forEach((cardIdx) => {
         const card = currentDeck.shift() as CardType;
         currentCardsOnBoard.splice(cardIdx, 1, card);
