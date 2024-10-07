@@ -38,6 +38,7 @@ const Card = ({ config, onClick }: ICardProps) => {
           </div>
           <div className="text-sm pt-2 font-medium">
             {config.name}
+            {/* {config.category} */}
           </div>
         </div>
       </button>

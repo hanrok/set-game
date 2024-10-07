@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Context, ContextValues } from "./Context";
 import { countSets, validatePossibleSet } from "@/utils";
 import { FaPlayCircle } from "react-icons/fa";
@@ -9,7 +9,6 @@ import { FaUserCircle } from "react-icons/fa";
 
 
 import Card from "./Card";
-import Alert from "./Alert";
 import Modal from "./Modal";
 import Header from "./partials/Header";
 import { CardType } from "@/models/card";
@@ -18,11 +17,24 @@ import { useAuth } from "./AuthContext";
 
 const GameBoard = () => {
   const {user} = useAuth();
-  const [showNotification, setShowNotification] = useState(false);
-  const [notificationMessage, setNotificationMessage] = useState<{ type: string; message: string } | null>(null);
-  const [timeoutId, setTimeoutId] = useState<any>(null);
-
-  const { deck, nsets, sets, addThreeCards, selectedSet, cardsOnBoard, unselectCard, selectCard, registerSet, clearSelectedSet, replaceCards, endGame, gameOver, resetGame } = useContext(Context) as ContextValues;
+  const {
+    deck,
+    nsets,
+    sets,
+    addThreeCards,
+    selectedSet,
+    cardsOnBoard,
+    unselectCard,
+    selectCard,
+    registerSet,
+    clearSelectedSet,
+    replaceCards,
+    endGame,
+    gameOver,
+    resetGame,
+    firstTime,
+    initializeGame,
+  } = useContext(Context) as ContextValues;
 
   const onSelectCard = (tapCard: CardType) => {
     if (tapCard.selected) {
@@ -31,15 +43,8 @@ const GameBoard = () => {
       const possibleSet = selectCard(tapCard);
       if (possibleSet.length === 3) {
         // If three cards were chosen, we proceed to evaluate the cards
-        setShowNotification(true); // Show the notification message
-        if (timeoutId) {
-          clearTimeout(timeoutId);
-        }
-        const timer = setTimeout(() => setShowNotification(false), 4000); // Dismiss notification after 4 seconds
-        setTimeoutId(timer);
-
+        
         if (validatePossibleSet(possibleSet)) {
-          setNotificationMessage({ type: "success", message: "Enhorabuena! Haz encontrado un SET" });
           registerSet(possibleSet); // Register set finded by user
           clearSelectedSet(); // Clear possible set selected by user
           
@@ -55,13 +60,16 @@ const GameBoard = () => {
           }
         } else {
           clearSelectedSet(); // Clear possible set selected by user
-          setNotificationMessage({ type: "warning", message: "Ups! Este no es un SET, vuelve a intentarlo" });
         }
       }
     }
   };
 
-  const handleEventModal = () => addThreeCards();
+  useEffect(() => {
+    if (!firstTime) {
+      resetGame();
+    }
+  }, []);
 
   return (
     <div className="flex flex-col flex-grow">
@@ -74,7 +82,7 @@ const GameBoard = () => {
               <div className="text-white mb-10">You found <span className="font-bold text-3xl mx-2">{sets.length}</span> sets!</div>
               <div className="flex flex-col p-10 space-y-2">
                 <div className="flex flex-grow">
-                  <button className="flex items-center justify-center bg-pink-1200 py-5 rounded-md text-white font-bold flex-grow" onClick={() => {console.log("clicked"); resetGame();}}>
+                  <button className="flex items-center justify-center bg-pink-1200 py-5 rounded-md text-white font-bold flex-grow" onClick={() => resetGame()}>
                     <FaPlayCircle className="mr-2" size={24} /> PLAY AGAIN!
                   </button>
                 </div>
@@ -115,8 +123,7 @@ const GameBoard = () => {
               </div>
             </div>
           </section>
-          {/* TODO: understand what to do if there are no sets */}
-          {/* {nsets?.length === 0 && <Modal onClick={handleEventModal} />} */}
+          {firstTime && <Modal onClick={() => initializeGame()} />}
         </>
       }
     </div>

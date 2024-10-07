@@ -15,6 +15,7 @@ export type ContextValues = {
   nsets: CardType[][] | null;
   cardsOnBoard: CardType[];
   selectedSet: CardType[];
+  firstTime: boolean;
 
   // timer
   elapsedTime: number,
@@ -41,8 +42,7 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
   const [deck, setDeck] = useState<CardType[]>([]); // store the remaining cards 
   const [cardsOnBoard, setCardsOnBoard] = useState<CardType[]>([]); // store the current cards on board
   const [selectedSet, updateSelectedSet] = useState<CardType[]>([]); // store the cards selected by user
-  const [sets, setSet] = useState<CardType[][]>([]); // store the sets
-  const [gameOver, setGameOver] = useState<boolean>(false);
+  const [sets, setSets] = useState<CardType[][]>([]); // store the sets
   // possible sets on board
   const [nsets, registerNumberOfSets] = useState<CardType[][]|null>(null);
 
@@ -50,6 +50,7 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
   const [elapsedTime, setElapsedTime] = useState(0);
   const [previousTime, setPreviousTime] = useState(0);
   const [timeLeft, setTimeLeft] = useState(GAME_TIME * 1000)
+  const [firstTime, setFirstTime] = useState(true);
 
   const {user} = useAuth();
 
@@ -87,10 +88,10 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
 
   useEffect(() => {
     if (!isRunning) {
-      startGame(true);
-      initializeGame();
+      // startGame(true);
+      // initializeGame();
     }
-  }, [cardsOnBoard, isRunning]);
+  }, [isRunning]);
 
   const initializeGame = () => {
     const cards = [...cardsList] as CardType[]
@@ -115,6 +116,8 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
     setPreviousTime(Date.now());
     setElapsedTime(0);
     setTimeLeft(GAME_TIME * 1000);
+    startGame(true);
+    setFirstTime(false);
   }
 
   // Function to unselect a selected card 
@@ -138,7 +141,7 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
    * @returns void
    */
   const registerSet = (set: CardType[]) => {
-    setSet([...sets, [...set]]);
+    setSets([...sets, [...set]]);
   }
 
   // Function to clear the possible set selected by user
@@ -202,15 +205,14 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
   }
 
   const endGame = () => {
-    setGameOver(true);
+    startGame(false);
     if (user) {
       saveScore(sets.length);
     }
   }
   
   const resetGame = () => {
-    setGameOver(false);
-    startGame(true);
+    setSets([]);
     initializeGame();
   };
 
@@ -220,12 +222,12 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
     nsets,
     cardsOnBoard,
     selectedSet,
+    firstTime,
 
     //timer
     elapsedTime,
     previousTime,
     timeLeft,
-  
 
     //functions
     initializeGame,
@@ -235,7 +237,7 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
     registerSet,
     replaceCards,
     addThreeCards,
-    gameOver,
+    gameOver: !firstTime && !isRunning,
     endGame,
     resetGame,
   }}>
