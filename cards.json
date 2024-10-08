@@ -47,7 +47,7 @@
     {
         "name": "Lightdash",
         "category": "Open source BI",
-        "logo": "logos/Lightdash.svg"
+        "logo": "logos/Lightdash.png"
     },
     {
         "name": "Metabase",
@@ -197,7 +197,7 @@
     {
         "name": "Bitbucket",
         "category": "Code repos",
-        "logo": "logos/Bitbucket.svg"
+        "logo": "logos/Bitbucket.png"
     },
     {
         "name": "dbt",
