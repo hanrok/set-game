@@ -8,7 +8,7 @@ import { MdEmail } from "react-icons/md"; // Email logo
 import Link from "next/link";
 import { useAuth } from "@/components/AuthContext";
 import { Context, ContextValues } from "@/components/Context";
-import { updateProfile } from "firebase/auth"; // Import updateProfile
+import { sendEmailVerification, updateProfile } from "firebase/auth"; // Import updateProfile
 
 const AuthComponent = (): JSX.Element => {
   const { user, signInWithGoogle, signInWithGithub, signInWithEmail, signUpWithEmail } = useAuth();
@@ -33,20 +33,28 @@ const AuthComponent = (): JSX.Element => {
 
   const onSignIn = async () => {
     if (!user && isSignUp) {
-      setIsSignUp(false);
-      setEmail("");
-      setPassword("");
-      return;
+        setIsSignUp(false);
+        setEmail("");
+        setPassword("");
+        return;
     }
-    
+
     // Automatically move to name entry if displayName is not set
     if (user && !user.displayName) {
-      setIsNameStep(true); // If no name, show step to add it
-      return; // Exit function early
+        setIsNameStep(true); // If no name, show step to add it
+        return; // Exit function early
     }
+
+    // Check if the user's email is verified
+    /* Need to understand if we want to be so aggresive..
     
-    router.push("/game");
+    if (user && user.emailVerified) {
+        router.push("/game"); // Proceed to game page if email is verified
+    } else if (user) {
+        setError("Please verify your email before proceeding."); // Notify user to verify email
+    }*/
   };
+
 
   const handleGoogleSignIn = async () => {
     try {
@@ -87,12 +95,20 @@ const AuthComponent = (): JSX.Element => {
 
   const handleSignUpStep2 = async () => {
     try {
-      await signUpWithEmail(email, password);
-      await onSignIn();
-    } catch (error: any) {
-      setError(error.message); // Display error message to the user
-    }
+        const userCredential = await signUpWithEmail(email, password);
+        const user = userCredential.user;
+
+        // Send email verification
+        await sendEmailVerification(user);
+        console.log("Verification email sent to " + user.email);
+
+        // Optionally, you might want to notify the user
+        setError("Verification email sent! Please check your inbox.");
+      } catch (error: any) {
+          setError(error.message); // Display error message to the user
+      }
   };
+
 
   const handleNameSubmit = async () => {
     try {

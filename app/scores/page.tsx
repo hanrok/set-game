@@ -14,6 +14,7 @@ export default function Scores() {
     const { user } = useAuth();
     const [scores, setScores] = useState([]);
     const router = useRouter();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (!user) {
@@ -30,13 +31,15 @@ export default function Scores() {
                 fetchedScores.push(doc.data());
             });
             setScores(fetchedScores);
+            setLoading(false);
         };
 
+        setLoading(true);
         fetchScores();
     }, []);
 
     return (
-        <>{Boolean(user?.displayName) ? (
+        <>{Boolean(user?.displayName) && !loading ? (
             <div className="flex flex-col flex-grow">
                 <Link href="/">
                     <div className="w-3/4 flex text-white mt-4 pl-5">
