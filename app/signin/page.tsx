@@ -25,11 +25,15 @@ const AuthComponent = (): JSX.Element => {
   const [isNameStep, setIsNameStep] = useState<boolean>(false); // Step for adding name
 
   useEffect(() => {
+    if (Boolean(user?.displayName)) {
+      router.push("/game");
+    }
+
     if (user && !user.displayName) {
       setIsNameStep(true); // If no name, show step to add it
       return; // Exit function early
     }
-  }, []);
+  }, [user]);
 
   const onSignIn = async () => {
     if (!user && isSignUp) {
@@ -96,16 +100,15 @@ const AuthComponent = (): JSX.Element => {
   const handleSignUpStep2 = async () => {
     try {
         const userCredential = await signUpWithEmail(email, password);
+        console.log("userCredential", userCredential)
         const user = userCredential.user;
 
         // Send email verification
         await sendEmailVerification(user);
         console.log("Verification email sent to " + user.email);
-
-        // Optionally, you might want to notify the user
-        setError("Verification email sent! Please check your inbox.");
       } catch (error: any) {
-          setError(error.message); // Display error message to the user
+        console.log("failed to sign up the user or something", error);
+        setError(error.message); // Display error message to the user
       }
   };
 
@@ -122,8 +125,6 @@ const AuthComponent = (): JSX.Element => {
       setError("Error updating name: " + error.message);
     }
   };
-
-  console.log("username", user, user?.displayName);
 
   return (
     <div className="flex flex-col items-stretch justify-center bg-purple-1200 flex-grow">

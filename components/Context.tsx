@@ -222,7 +222,6 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
   }
 
   const endGame = () => {
-    console.log("endGame!");
     startGame(false);
     if (user) {
       saveScore({ sets, setsTimestamps, gameToken, gameStartTimestamp }).then(() => {

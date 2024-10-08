@@ -9,7 +9,8 @@ import {
   signInWithEmailAndPassword, 
   createUserWithEmailAndPassword, 
   signOut, 
-  User 
+  User, 
+  UserCredential
 } from 'firebase/auth';
 import { app } from '@/firebase'; // Firebase app initialization
 
@@ -18,8 +19,8 @@ interface AuthContextType {
   user: User | null;
   signInWithGoogle: () => Promise<void>;
   signInWithGithub: () => Promise<void>;
-  signInWithEmail: (email: string, password: string) => Promise<void>;
-  signUpWithEmail: (email: string, password: string) => Promise<void>;
+  signInWithEmail: (email: string, password: string) => Promise<UserCredential>;
+  signUpWithEmail: (email: string, password: string) => Promise<UserCredential>;
   logout: () => Promise<void>;
 }
 
@@ -56,13 +57,14 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
   };
 
   // Function to sign in with Email and Password
-  const signInWithEmail = async (email: string, password: string): Promise<void> => {
-    await signInWithEmailAndPassword(auth, email, password);
+  const signInWithEmail = async (email: string, password: string): Promise<UserCredential> => {
+    return await signInWithEmailAndPassword(auth, email, password);
   };
 
   // Function to sign up with Email and Password
-  const signUpWithEmail = async (email: string, password: string): Promise<void> => {
-    await createUserWithEmailAndPassword(auth, email, password);
+  const signUpWithEmail = async (email: string, password: string): Promise<UserCredential> => {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    return userCredential;
   };
 
   // Function to log out
