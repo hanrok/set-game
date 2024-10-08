@@ -50,10 +50,10 @@ const Card = ({ config, onClick, showHint = false }: ICardProps) => {
             </div>
           </div>
           : 
-          <Fade className="flex-grow flex flex-col justify-center bg-orange-1200">
-            <div className="align-bottom text-sm">
+          <Fade className="flex-grow flex flex-col justify-center bg-orange-1200 text-gray-100">
+            <div className="align-bottom text-xs">
               My category is<br />
-              <span className="font-bold">{config.category}</span>
+              <span className="font-bold text-md">{config.category}</span>
             </div>
           </Fade>
         }
