@@ -1,24 +1,26 @@
-import { db, auth } from '@/firebase';
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "@/firebase";
 
-export const saveScore = async (setsFound) => {
+interface TEndGameFunction {
+  message: string;
+}
+
+export const saveScore = async ({ sets, setsTimestamps, gameToken, gameStartTimestamp }) => {
+  const endGameFunction = httpsCallable<unknown, TEndGameFunction>(functions, "endGame");
+  
   try {
-    const user = auth.currentUser;
-    if (user) {
-      // Reference to the user's scores collection
-      const scoresRef = collection(db, "users", user.uid, "scores");
+    // Collect sets with their timestamps
+    const setsToSubmit = sets.map((set, idx) => ({timestamp: setsTimestamps[idx], cards: set.map(card => card.name)}));
 
-      // Add a new score document
-      await addDoc(scoresRef, {
-        setsFound: setsFound,
-        timestamp: serverTimestamp(),
-      });
+    // Call the Firebase function to validate and save score
+    const { data } = await endGameFunction({
+      token: gameToken,
+      sets: setsToSubmit,
+      gameStartTimestamp: gameStartTimestamp,
+    });
 
-      console.log("Score saved successfully!");
-    } else {
-      console.log("No user is signed in");
-    }
+    console.log(data.message); // Success message
   } catch (error) {
-    console.error("Error saving score: ", error);
+    console.error("Error ending game:", error.message);
   }
 };

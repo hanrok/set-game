@@ -6,8 +6,15 @@ import cardsList from "cards.json";
 import { CardType } from "@/models/card";
 import { saveScore } from "@/utils/scores";
 import { useAuth } from "./AuthContext";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "@/firebase";
 
 const GAME_TIME = 60
+
+interface StartGameFunctions {
+  token: string;
+  timestamp: number;
+}
 
 export type ContextValues = {
   deck: CardType[];
@@ -32,6 +39,11 @@ export type ContextValues = {
   gameOver: boolean,
   endGame: () => void,
   resetGame: () => void,
+
+  // server side token
+  gameToken?: string;
+  gameStartTimestamp?: number;
+  setsTimestamps: number[];
 }
 
 // Creating a new context
@@ -43,6 +55,7 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
   const [cardsOnBoard, setCardsOnBoard] = useState<CardType[]>([]); // store the current cards on board
   const [selectedSet, updateSelectedSet] = useState<CardType[]>([]); // store the cards selected by user
   const [sets, setSets] = useState<CardType[][]>([]); // store the sets
+  const [setsTimestamps, setSetsTimestamps] = useState<number[]>([]); // store the sets
   // possible sets on board
   const [nsets, registerNumberOfSets] = useState<CardType[][]|null>(null);
 
@@ -51,6 +64,8 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
   const [previousTime, setPreviousTime] = useState(0);
   const [timeLeft, setTimeLeft] = useState(GAME_TIME * 1000)
   const [firstTime, setFirstTime] = useState(true);
+  const [gameToken, setGameToken] = useState(null);
+  const [gameStartTimestamp, setGameStartTimestamp] = useState(null);
 
   const {user} = useAuth();
 
@@ -85,31 +100,42 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
     }
   }, [timeLeft]);
 
+  const initializeGameToken = async () => {
+    const startGameFunction = httpsCallable<unknown, StartGameFunctions>(functions, "startGame");
+    const { data } = await startGameFunction();
+  
+    // Save token and timestamp to state
+    setGameToken(data.token);
+    setGameStartTimestamp(data.timestamp);
+  }
+
   const initializeGame = () => {
-    const cards = [...cardsList] as CardType[]
+    initializeGameToken().then(() => {
+      const cards = [...cardsList] as CardType[]
     
-    // shuffeling deck is making the first cards to be the deck
-    let setsCountOnBoard = 0
-    let shuffledCards: CardType[] = [];
-    while (setsCountOnBoard <= 0) {
-        shuffledCards = shuffleDeck(cards); // Suffle deck
-        let {size} = countSets(shuffledCards.slice(0, 12));
-        setsCountOnBoard = size
-    }
+      // shuffeling deck is making the first cards to be the deck
+      let setsCountOnBoard = 0
+      let shuffledCards: CardType[] = [];
+      while (setsCountOnBoard <= 0) {
+          shuffledCards = shuffleDeck(cards); // Suffle deck
+          let {size} = countSets(shuffledCards.slice(0, 12));
+          setsCountOnBoard = size
+      }
 
-    const { deck, preGameCards } = setCardsOnTable(shuffledCards);
-    setDeck(deck);
-    setCardsOnBoard(preGameCards);
+      const { deck, preGameCards } = setCardsOnTable(shuffledCards);
+      setDeck(deck);
+      setCardsOnBoard(preGameCards);
 
-    const { sets } = countSets(preGameCards);
-    registerNumberOfSets(sets);
+      const { sets } = countSets(preGameCards);
+      registerNumberOfSets(sets);
 
-    //timer
-    setPreviousTime(Date.now());
-    setElapsedTime(0);
-    setTimeLeft(GAME_TIME * 1000);
-    startGame(true);
-    setFirstTime(false);
+      //timer
+      setPreviousTime(Date.now());
+      setElapsedTime(0);
+      setTimeLeft(GAME_TIME * 1000);
+      startGame(true);
+      setFirstTime(false);
+    });
   }
 
   // Function to unselect a selected card 
@@ -134,6 +160,7 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
    */
   const registerSet = (set: CardType[]) => {
     setSets([...sets, [...set]]);
+    setSetsTimestamps([...setsTimestamps, Date.now()]);
   }
 
   // Function to clear the possible set selected by user
@@ -195,14 +222,20 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
   }
 
   const endGame = () => {
+    console.log("endGame!");
     startGame(false);
     if (user) {
-      saveScore(sets.length);
+      saveScore({ sets, setsTimestamps, gameToken, gameStartTimestamp }).then(() => {
+        console.log("score saved");
+      }).catch((err) => {
+        console.error("Failed to save score", err);
+      });
     }
   }
   
   const resetGame = () => {
     setSets([]);
+    setSetsTimestamps([]);
     initializeGame();
   };
 
@@ -230,6 +263,9 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
     gameOver: !firstTime && !isRunning,
     endGame,
     resetGame,
+    gameToken,
+    gameStartTimestamp,
+    setsTimestamps,
   }}>
     { children }
   </Context.Provider>
