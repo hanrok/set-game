@@ -9,13 +9,13 @@ import { useRouter } from "next/navigation";
 import { BeatLoader } from "react-spinners";
 import Loading from "@/components/Loading";
 
+
 export default function Scores() {
     const { user } = useAuth();
     const [scores, setScores] = useState([]);
     const router = useRouter();
 
     useEffect(() => {
-        console.log("user", user);
         if (!user) {
             router.push("/signin");
         }
@@ -36,7 +36,7 @@ export default function Scores() {
     }, []);
 
     return (
-        <>{user ? (
+        <>{Boolean(user?.displayName) ? (
             <div className="flex flex-col flex-grow">
                 <Link href="/">
                     <div className="w-3/4 flex text-white mt-4 pl-5">

@@ -72,7 +72,7 @@ const GameBoard = () => {
   };
 
   useEffect(() => {
-    if (!user) {
+    if (!user?.displayName) {
         router.push("/signin");
         return;
     }
@@ -84,7 +84,7 @@ const GameBoard = () => {
 
   return (
     <>
-    {!user ? <Loading /> : <div className="flex flex-col flex-grow">
+    {!user?.displayName ? <Loading /> : <div className="flex flex-col flex-grow">
       <Header />
       {gameOver ? 
         <div className="flex flex-grow flex-col justify-center m-4">

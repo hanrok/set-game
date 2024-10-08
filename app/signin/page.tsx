@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc"; // Google logo
 import { FaGithub } from "react-icons/fa"; // GitHub logo
@@ -19,24 +19,33 @@ const AuthComponent = (): JSX.Element => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const [isSignUp, setIsSignUp] = useState<boolean>(false); // Toggle between sign-in and sign-up
+  const [isSignUp, setIsSignUp] = useState<boolean>(true); // Toggle between sign-in and sign-up
   const [step, setStep] = useState<number>(1); // To manage signup steps
   const [name, setName] = useState<string>(""); // To capture user name
   const [isNameStep, setIsNameStep] = useState<boolean>(false); // Step for adding name
+
+  useEffect(() => {
+    if (user && !user.displayName) {
+      setIsNameStep(true); // If no name, show step to add it
+      return; // Exit function early
+    }
+  }, []);
 
   const onSignIn = async () => {
     if (!user && isSignUp) {
       setIsSignUp(false);
       setEmail("");
       setPassword("");
-      return
+      return;
     }
     
-    if (!user?.displayName) {
+    // Automatically move to name entry if displayName is not set
+    if (user && !user.displayName) {
       setIsNameStep(true); // If no name, show step to add it
-    } else {
-      router.push("/game");
+      return; // Exit function early
     }
+    
+    router.push("/game");
   };
 
   const handleGoogleSignIn = async () => {
@@ -91,12 +100,14 @@ const AuthComponent = (): JSX.Element => {
         // Update the user's profile with the provided name
         await updateProfile(user, { displayName: name });
         setIsNameStep(false);
-        router.push("/game"); // Proceed to the scores page
+        router.push("/game"); // Proceed to the game page
       }
     } catch (error: any) {
       setError("Error updating name: " + error.message);
     }
   };
+
+  console.log("username", user, user?.displayName);
 
   return (
     <div className="flex flex-col items-stretch justify-center bg-purple-1200 flex-grow">
@@ -112,7 +123,7 @@ const AuthComponent = (): JSX.Element => {
       </Link>
 
       <div className="flex flex-col justify-center items-center flex-grow mx-6">
-        <h1 className="text-white text-3xl font-bold mb-6 text-center">{isSignUp ? "Sign Up" : "Sign In"}</h1>
+        <h1 className="text-white text-3xl font-bold mb-6 text-center">{isNameStep ? "Your Nickname" : isSignUp ? "Sign Up" : "Sign In"}</h1>
 
         {error && <p className="text-red-500 mb-4">{error}</p>}
 
@@ -229,7 +240,7 @@ const AuthComponent = (): JSX.Element => {
 
               <button
                 onClick={handleGithubSignIn}
-                className="flex items-center justify-center w-full bg-black text-white font-semibold py-2 px-4 rounded shadow hover:bg-gray-800 transition-colors"
+                className="flex items-center justify-center w-full bg-white border border-gray-300 text-gray-800 font-semibold py-2 px-4 rounded shadow hover:bg-gray-100 transition-colors"
               >
                 <FaGithub className="mr-2" size={24} /> Sign in with GitHub
               </button>
