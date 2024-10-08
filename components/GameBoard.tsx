@@ -15,6 +15,8 @@ import { CardType } from "@/models/card";
 import Link from "next/link";
 import { useAuth } from "./AuthContext";
 import useSound from "use-sound";
+import { useRouter } from "next/navigation";
+import Loading from "./Loading";
 
 const GameBoard = () => {
   const {user} = useAuth();
@@ -37,6 +39,7 @@ const GameBoard = () => {
     initializeGame,
   } = useContext(Context) as ContextValues;
   const [playRightSound] = useSound('assets/sounds/right.wav');
+  const router = useRouter();
 
   const onSelectCard = (tapCard: CardType) => {
     if (tapCard.selected) {
@@ -69,13 +72,19 @@ const GameBoard = () => {
   };
 
   useEffect(() => {
+    if (!user) {
+        router.push("/signin");
+        return;
+    }
+    
     if (!firstTime) {
       resetGame();
     }
   }, []);
 
   return (
-    <div className="flex flex-col flex-grow">
+    <>
+    {!user ? <Loading /> : <div className="flex flex-col flex-grow">
       <Header />
       {gameOver ? 
         <div className="flex flex-grow flex-col justify-center m-4">
@@ -129,7 +138,8 @@ const GameBoard = () => {
           {firstTime && <Modal onClick={() => initializeGame()} />}
         </>
       }
-    </div>
+    </div>}
+    </>
   );
 };
 

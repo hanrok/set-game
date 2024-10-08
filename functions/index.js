@@ -52,8 +52,7 @@ function decrypt(encrypted) {
 exports.startGame = onCall((request) => {
   const timestamp = Date.now();
   const token = encrypt(timestamp.toString());
-
-  logger.info("New game started", { uid: request.auth.uid, timestamp, token });
+  logger.info("New game started", { uid: request.auth?.uid, timestamp, token });
 
   return {
     token,
@@ -152,25 +151,32 @@ async function updateLeaderboard(uid, score) {
   // Fetch the current top 10 leaderboard
   const leaderboardSnapshot = await leaderboardRef.orderBy("score", "desc").limit(10).get();
 
-  // If the new score qualifies for the top 10
-  if (leaderboardSnapshot.size < 10 || score > leaderboardSnapshot.docs[leaderboardSnapshot.size - 1].data().score) {
-    logger.info("Updating leaderboard", { uid, score });
+  try {
+    // Retrieve the user record from Firebase Authentication
+    const userRecord = await admin.auth().getUser(uid);
+    // If the new score qualifies for the top 10
+    if (leaderboardSnapshot.size < 10 || score > leaderboardSnapshot.docs[leaderboardSnapshot.size - 1].data().score) {
+      logger.info("Updating leaderboard", { uid, score });
 
-    // Add the new score
-    await leaderboardRef.add({
-      uid,
-      score,
-      timestamp: Date.now(),
-    });
+      // Add the new score
+      await leaderboardRef.add({
+        uid,
+        score,
+        name: userRecord.displayName,
+        timestamp: Date.now(),
+      });
 
-    // If there are now more than 10 scores, remove the lowest one
-    if (leaderboardSnapshot.size >= 10) {
-      const lowestScoreDoc = leaderboardSnapshot.docs[leaderboardSnapshot.size - 1];
-      await leaderboardRef.doc(lowestScoreDoc.id).delete();
+      // If there are now more than 10 scores, remove the lowest one
+      if (leaderboardSnapshot.size >= 10) {
+        const lowestScoreDoc = leaderboardSnapshot.docs[leaderboardSnapshot.size - 1];
+        await leaderboardRef.doc(lowestScoreDoc.id).delete();
 
-      logger.info("Removed lowest score from leaderboard", { uid: lowestScoreDoc.data().uid });
+        logger.info("Removed lowest score from leaderboard", { uid: lowestScoreDoc.data().uid });
+      }
+    } else {
+      logger.info("Score did not qualify for leaderboard", { uid, score });
     }
-  } else {
-    logger.info("Score did not qualify for leaderboard", { uid, score });
+  } catch (error) {
+    throw new functions.https.HttpsError("internal", "Unable to retrieve user information.");
   }
 }
