@@ -1,6 +1,7 @@
 'use client'
 
-import { useContext, useEffect } from "react";
+import cn from "clsx";
+import { useContext, useEffect, useState } from "react";
 import { Context, ContextValues } from "./Context";
 import { countSets, validatePossibleSet } from "@/utils";
 import { FaPlayCircle } from "react-icons/fa";
@@ -38,7 +39,9 @@ const GameBoard = () => {
     firstTime,
     initializeGame,
   } = useContext(Context) as ContextValues;
+  const [showHints, setShowHints] = useState<CardType[]>([]);
   const [playRightSound] = useSound('assets/sounds/right.wav');
+  const [playWrongSound] = useSound('assets/sounds/wrong.mp3');
   const router = useRouter();
 
   const onSelectCard = (tapCard: CardType) => {
@@ -65,7 +68,15 @@ const GameBoard = () => {
             endGame();
           }
         } else {
-          clearSelectedSet(); // Clear possible set selected by user
+          playWrongSound();
+          // Incorrect set, show hint
+          setShowHints(possibleSet);
+          
+          // Hide hints after 1 second
+          setTimeout(() => {
+            setShowHints([]);
+            clearSelectedSet(); // Clear possible set selected by user
+          }, 1500);
         }
       }
     }
@@ -81,6 +92,10 @@ const GameBoard = () => {
       resetGame();
     }
   }, []);
+
+  const cardContainerClassName = cn("grid grid-cols-3 grid-rows-4 gap-x-4 gap-y-4", {
+    "pointer-events-none": Boolean(showHints.length > 0),
+  });
 
   return (
     <>
@@ -119,9 +134,14 @@ const GameBoard = () => {
         <>
           <section className="flex flex-col px-4 flex-grow justify-center">
             <div className="flex flex-col px-6 justify-center flex-grow">
-              <div className="grid grid-cols-3 grid-rows-4 gap-x-4 gap-y-4" style={{height: "65vh"}}>
+              <div className={cardContainerClassName} style={{height: "65vh"}}>
                 {cardsOnBoard.map((card, index) => (
-                  <Card key={index} config={card} onClick={() => onSelectCard(card)} />
+                  <Card
+                    key={index} 
+                    config={card} 
+                    onClick={() => onSelectCard(card)} 
+                    showHint={showHints.includes(card)}  // Pass showHint prop based on incorrect set
+                  />
                 ))}
               </div>
               <div className="py-2 flex items-center justify-between text-gray-400">
