@@ -44,8 +44,8 @@ const Card = ({ config, onClick }: ICardProps) => {
           <div className="flex-grow w-full h-full bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url('${config.logo}')` }}>
           </div>
           <div className="text-sm pt-2 font-medium">
-            {/* {config.name} */}
-            {config.category}
+            {config.name}
+            {/* {config.category} */}
           </div>
         </div>
       </button>
