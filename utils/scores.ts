@@ -1,7 +1,30 @@
 import { db, auth } from '@/firebase';
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "@/firebase";
 
 export const saveScore = async (setsFound) => {
+  const endGameFunction = httpsCallable(functions, "endGame");
+
+  try {
+    // Collect sets with their timestamps
+    const setsToSubmit = sets.map(set => ({
+      cards: set.cards,
+      timestamp: set.timestamp, // Add timestamp when the set was found
+    }));
+
+    // Call the Firebase function to validate and save score
+    const { data } = await endGameFunction({
+      token: gameToken,
+      sets: setsToSubmit,
+      gameStartTimestamp: gameStartTimestamp,
+    });
+
+    console.log(data.message); // Success message
+  } catch (error) {
+    console.error("Error ending game:", error.message);
+  }
+
   try {
     const user = auth.currentUser;
     if (user) {

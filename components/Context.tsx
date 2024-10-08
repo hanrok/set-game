@@ -6,8 +6,15 @@ import cardsList from "cards.json";
 import { CardType } from "@/models/card";
 import { saveScore } from "@/utils/scores";
 import { useAuth } from "./AuthContext";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "@/firebase";
 
 const GAME_TIME = 60
+
+interface StartGameFunctions {
+  token: string;
+  timestamp: number;
+}
 
 export type ContextValues = {
   deck: CardType[];
@@ -84,6 +91,16 @@ const SetGameContext = ({ children }: { children?: ReactNode; }) => {
       endGame();
     }
   }, [timeLeft]);
+
+  const initializeFunctions = async () => {
+    const startGameFunction = httpsCallable<unknown, StartGameFunctions>(functions, "startGame");
+    const { data } = await startGameFunction();
+  
+    // Save token and timestamp to state
+    setGameToken(data.token);
+    setGameStartTimestamp(data.timestamp);
+  
+  }
 
   const initializeGame = () => {
     const cards = [...cardsList] as CardType[]
